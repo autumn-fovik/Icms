@@ -29,14 +29,9 @@ public class SysUserEntity implements Serializable {
     /**
      * 用户ID
      */
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
     private Long userId;
 
-    /**
-     * 部门ID
-     */
-    @TableField("dept_id")
-    private Long deptId;
 
     /**
      * 用户账号

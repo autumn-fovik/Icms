@@ -1,18 +1,16 @@
 <template>
   <n-card class="app-container" :segmented="{ content : true }">
     <template #header>
-      <n-button type="primary">daw</n-button>
+      <n-button type="primary">写文章</n-button>
     </template>
-    <n-data-table>
+   <VditorEditor style="height: 100%;display: flex;width: 100%;" />
 
-    </n-data-table>
-    <template #footer>
-      <n-pagination></n-pagination>
-    </template>
+
   </n-card>
 </template>
 
 <script>
+import VditorEditor from "@/components/VditorEditor/index.vue"
 </script>
 
 <style scoped lang="scss">
