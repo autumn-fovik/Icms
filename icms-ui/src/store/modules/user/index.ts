@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {store} from "@/store";
-import { useAppStore } from "@/store/modules/app";
-import {getUserInfo, login} from "@/apis/userApi"
+import {useAppStore} from "@/store/modules/app";
+import {getUserInfo, login} from "@/apis/loginApi"
 
 export interface IUserStore {
     userInfo : any | undefined,

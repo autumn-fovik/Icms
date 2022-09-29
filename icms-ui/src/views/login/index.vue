@@ -24,11 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInst } from "naive-ui"
+import type {FormInst} from "naive-ui"
 import {useUserStore} from "@/store/modules/user";
 import {useRouter} from "vue-router";
-import { User,Key } from "@icon-park/vue-next"
-import { Icon } from "@vicons/utils"
+import {Key, User} from "@icon-park/vue-next"
 
 const store = useUserStore()
 

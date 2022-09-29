@@ -19,6 +19,6 @@ public interface SysUserService extends IService<SysUserEntity> {
      * @param userId
      * @return
      */
-    public List<String> queryUserPermission(Long userId);
+    public List<String> queryUserPermission(String userId);
 
 }

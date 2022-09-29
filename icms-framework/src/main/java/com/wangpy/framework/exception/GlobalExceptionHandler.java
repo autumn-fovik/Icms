@@ -35,5 +35,16 @@ public class GlobalExceptionHandler {
 
     }
 
+    /**
+     *  全局异常捕获
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public AjaxResult exception(RuntimeException e){
+        return AjaxResult.error(e.getMessage());
+
+    }
+
 
 }

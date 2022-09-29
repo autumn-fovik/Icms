@@ -23,7 +23,8 @@
 <script setup lang="ts">
 import {Navbar, Sidebar} from "./components"
 import {useAppStore} from "@/store/modules/app";
-import {  ref } from 'vue';
+import {ref} from 'vue';
+
 const classObj = computed(()=>({
   hideSidebar: ! useAppStore().getCollapsed
 }))
@@ -31,7 +32,7 @@ const classObj = computed(()=>({
 const ProductList = ref([])
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 /* fade-transform */
 .fade-transform-leave-active,
 .fade-transform-enter-active {
@@ -79,5 +80,8 @@ const ProductList = ref([])
   .app-side {
     width: 64px;
   }
+}
+.app-container {
+  height: calc(100vh - 108px);
 }
 </style>

@@ -22,7 +22,7 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
      * @param userId
      * @return
      */
-    public List<String> queryUserPermission(Long userId);
+    public List<String> queryUserPermission(String userId);
 
     /**
      * 根据用户名查询用户
@@ -36,14 +36,14 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
      * @param userId
      * @return
      */
-    public List<SysMenuEntity> queryUserMenu(Long userId);
+    public List<SysMenuEntity> queryUserMenu(String userId);
 
     /**
      * 根据用户ID查询用户
      * @param userId
      * @return
      */
-    public SysUserEntity queryUserByUserId(Long userId);
+    public SysUserEntity queryUserByUserId(String userId);
 
 
 }

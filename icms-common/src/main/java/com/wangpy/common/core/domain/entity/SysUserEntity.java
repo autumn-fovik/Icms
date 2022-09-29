@@ -30,7 +30,7 @@ public class SysUserEntity implements Serializable {
      * 用户ID
      */
     @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
-    private Long userId;
+    private String userId;
 
 
     /**
@@ -138,7 +138,6 @@ public class SysUserEntity implements Serializable {
 
     public static final String USER_ID = "user_id";
 
-    public static final String DEPT_ID = "dept_id";
 
     public static final String USER_NAME = "user_name";
 

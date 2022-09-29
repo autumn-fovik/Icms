@@ -1,6 +1,6 @@
-import { RouteRecordRaw } from 'vue-router';
-import { Layout, ParentLayout } from '@/router/constant';
-import {getRouter} from "@/apis/userApi";
+import {RouteRecordRaw} from 'vue-router';
+import {Layout, ParentLayout} from '@/router/constant';
+import {getRouter} from "@/apis/loginApi";
 
 /**
  * 格式化 后端 结构信息并递归生成层级路由表

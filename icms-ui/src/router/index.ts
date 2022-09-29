@@ -7,6 +7,16 @@ export const RootRoute: RouteRecordRaw = {
     path: '/',
     name: 'Root',
     component : Layout,
+    redirect : "/dashboard",
+    children : [{
+        path : "/dashboard",
+        name : "仪表盘",
+        component : () => import('@/views/dashboard/index.vue'),
+        meta: {
+            title: '仪表盘',
+            id : 0
+        },
+    }],
     meta: {
         title: 'Root',
     },

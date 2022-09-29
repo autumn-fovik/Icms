@@ -23,7 +23,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     private SysUserMapper userMapper;
 
     @Override
-    public List<String> queryUserPermission(Long userId) {
+    public List<String> queryUserPermission(String userId) {
         return userMapper.queryUserPermission(userId);
     }
 

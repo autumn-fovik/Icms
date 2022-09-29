@@ -5,8 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStoreWidthOut } from "@/store/modules/app";
+import {useAppStoreWidthOut} from "@/store/modules/app";
 import {computed} from "vue";
+
 const  toggleClick = ()=>{
   useAppStoreWidthOut().changeCollapsed()
 }

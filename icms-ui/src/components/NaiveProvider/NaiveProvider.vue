@@ -14,9 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { zhCN, dateZhCN } from "naive-ui"
-import { defineComponent, h } from 'vue';
-import { useDialog, useLoadingBar, useMessage, useNotification } from 'naive-ui';
+import {dateZhCN, useDialog, useLoadingBar, useMessage, useNotification, zhCN} from "naive-ui"
+import {defineComponent, h} from 'vue';
 
 // 挂载naive组件的方法至window, 以便在路由钩子函数和请求函数里面调用
 function registerNaiveTools() {

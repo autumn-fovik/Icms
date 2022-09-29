@@ -22,7 +22,7 @@ public class LoginUser implements UserDetails {
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
     /**
      * 用户唯一标识
      */
@@ -47,7 +47,7 @@ public class LoginUser implements UserDetails {
      */
     private Long expireTime;
 
-    public LoginUser(Long userId, Set<String> permissions, SysUserEntity user) {
+    public LoginUser(String userId, Set<String> permissions, SysUserEntity user) {
         this.userId = userId;
         this.permissions = permissions;
         this.user = user;

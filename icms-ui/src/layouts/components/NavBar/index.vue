@@ -31,9 +31,9 @@
 import Hamburger from "@/components/Hamburger/index.vue"
 import Breadcrumb from "@/components/Breadcrumb/index.vue"
 import type {DropdownOption} from "naive-ui";
-import { Remind } from "@icon-park/vue-next"
+import {Remind} from "@icon-park/vue-next"
 
-import { useUserStore } from "@/store/modules/user/index"
+import {useUserStore} from "@/store/modules/user/index"
 
 
 const options : Array<DropdownOption> = [

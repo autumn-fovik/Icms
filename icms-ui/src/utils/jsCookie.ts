@@ -1,4 +1,4 @@
-import Cookie  from "js-cookie"
+import Cookie from "js-cookie"
 
 
 const TokenKey : string = "Admin-Token"

@@ -3,7 +3,7 @@
     <template #header>
       <n-button type="primary">添加菜单</n-button>
     </template>
-    <n-data-table>
+    <n-data-table style="display: flex;height: 100%">
 
     </n-data-table>
     <template #footer>
@@ -22,7 +22,5 @@
 </script>
 
 <style scoped lang="scss">
-.app-container {
-  height: calc(100vh - 108px);
-}
+
 </style>

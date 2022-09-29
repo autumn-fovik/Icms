@@ -1,8 +1,8 @@
 import {RouteRecordRaw} from "vue-router";
 import {defineStore} from "pinia";
-import { constantRouter } from "@/router/index"
+import {constantRouter} from "@/router/index"
 import {generatorDynamicRouter} from "@/router/generator-routers";
-import { store } from "@/store"
+import {store} from "@/store"
 
 
 export interface IAsyncRouteState {

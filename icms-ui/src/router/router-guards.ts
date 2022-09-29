@@ -2,7 +2,6 @@ import {Router, RouteRecordRaw} from "vue-router";
 import {useAppStoreWidthOut} from "@/store/modules/app";
 import {useUserStoreWidthOut} from "@/store/modules/user";
 import {useAsyncRouteStoreWidthOut} from "@/store/modules/asyncRoute";
-import {getUserInfo} from "@/apis/userApi";
 import {ErrorPageRoute} from "@/router/baseRouter";
 
 const whitePathList = ['/login']

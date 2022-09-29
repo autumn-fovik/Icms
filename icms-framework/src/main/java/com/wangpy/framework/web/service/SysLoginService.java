@@ -76,7 +76,7 @@ public class SysLoginService {
      * @return {@link List}<{@link RouterVo}>
      */
     public List<RouterVo> getRoute(){
-        Long userId = SecurityUtils.getUserId();
+        String userId = SecurityUtils.getUserId();
         List<SysMenuEntity> sysMenuEntities = sysUserMapper.queryUserMenu(userId);
         List<RouterVo> routerVos = compileRout(sysMenuEntities, 0L);
         return routerVos;

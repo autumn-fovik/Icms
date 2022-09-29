@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import { store } from "@/store";
+import {store} from "@/store";
 import {getToken, removeToken, setToken} from "@/utils/jsCookie";
 
 export interface IAppState {
