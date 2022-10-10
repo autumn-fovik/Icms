@@ -1,5 +1,5 @@
 /*
- Navicat Premium Data Transfer
+ Navicat MySQL Data Transfer
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 29/09/2022 12:28:57
+ Date: 10/10/2022 16:49:06
 */
 
 SET NAMES utf8mb4;
@@ -365,7 +365,7 @@ CREATE TABLE `sys_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2042 DEFAULT CHARSET=utf8mb3 COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2043 DEFAULT CHARSET=utf8mb3 COMMENT='菜单权限表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -403,6 +403,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `path`
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `path`, `component`, `query`, `is_frame`, `is_cache`, `menu_type`, `visible`, `status`, `perms`, `icon`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (2039, '文章审核', 2040, 1, 'article', 'audit/article', NULL, 1, 0, 'C', '0', '0', '', 'FileDisplay', '2', '2022-05-11 17:04:43', '2', '2022-05-12 21:20:26', '');
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `path`, `component`, `query`, `is_frame`, `is_cache`, `menu_type`, `visible`, `status`, `perms`, `icon`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (2040, '审核', 0, 1, 'audit', 'Layout', NULL, 1, 0, 'M', '0', '0', '', 'Audit', '2', '2022-05-12 13:41:33', '', NULL, '');
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `path`, `component`, `query`, `is_frame`, `is_cache`, `menu_type`, `visible`, `status`, `perms`, `icon`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (2041, '安全配置', 2033, 1, 'security', 'settings/security', NULL, 1, 0, 'C', '0', '0', '', 'Protect', '2', '2022-05-12 21:17:59', '', NULL, '');
+INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `path`, `component`, `query`, `is_frame`, `is_cache`, `menu_type`, `visible`, `status`, `perms`, `icon`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (2042, '关于', 0, 8, 'project', 'project/index', NULL, 11, 0, 'M', '0', '0', NULL, 'FindOne', '', NULL, '', NULL, '');
 COMMIT;
 
 -- ----------------------------
@@ -479,6 +480,7 @@ INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2038);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2039);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2040);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2041);
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2042);
 COMMIT;
 
 -- ----------------------------
@@ -512,7 +514,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('1', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2022-04-21 21:22:19', 'admin', '2022-04-21 21:22:19', '', NULL, '管理员');
-INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('100', '435', '3453', '00', '', '', '0', '', '', '0', '2', '', NULL, '', NULL, '', NULL, NULL);
+INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('100', '435', '3453', '00', '', '', '2', '', '', '0', '2', '', NULL, '', NULL, '', NULL, NULL);
 INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('101', '345', '453', '00', '', '', '0', '', '', '0', '0', '', NULL, '', NULL, '', NULL, NULL);
 INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('102', '5344', '4533', '00', '', '', '0', '', '', '0', '0', '', NULL, '', NULL, '', NULL, NULL);
 INSERT INTO `sys_user` (`user_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES ('103', '53', '453', '00', '', '', '0', '', '', '0', '0', '', NULL, '', NULL, '', NULL, NULL);

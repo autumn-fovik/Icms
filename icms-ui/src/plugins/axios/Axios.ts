@@ -40,6 +40,8 @@ export default class Axios {
                      router.push({path : "/login"});
                     return config
                     break;
+                case 204 :
+                    window.$message?.error(msg)
                 default:
                     return config
                     break;

@@ -82,6 +82,7 @@ const ProductList = ref([])
   }
 }
 .app-container {
-  height: calc(100vh - 108px);
+  min-height: calc(100vh - 108px);
+
 }
 </style>

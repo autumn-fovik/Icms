@@ -3,6 +3,9 @@ package com.wangpy.framework.exception;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.exception.ServiceException;
 import com.wangpy.common.exception.user.UserException;
+import io.lettuce.core.RedisConnectionException;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @Date: Created in 2022/8/15 23:03
  */
 @RestControllerAdvice
+@Order(value = 99)
 public class GlobalExceptionHandler {
     /**
      * 用户异常
@@ -35,6 +39,7 @@ public class GlobalExceptionHandler {
 
     }
 
+
     /**
      *  全局异常捕获
      * @param e
@@ -42,7 +47,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public AjaxResult exception(RuntimeException e){
-        return AjaxResult.error(e.getMessage());
+        return AjaxResult.error(e.getClass().toString());
 
     }
 

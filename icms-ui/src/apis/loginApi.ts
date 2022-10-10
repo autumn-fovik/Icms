@@ -1,11 +1,10 @@
 import {http} from "@/plugins/axios";
-import qs from "qs"
 
 export function login(data : any) {
     return http.request({
         url : "auth/login",
         method : "POST",
-        data : qs.stringify(data)
+        data
     })
 
 }

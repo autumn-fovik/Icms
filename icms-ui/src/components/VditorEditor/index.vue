@@ -31,5 +31,7 @@ onMounted(() => {
   //height: 100vh !important;
   //z-index: 90;
   //border-radius: 0;
+  display: flex;
+  height: initial !important;
 }
 </style>

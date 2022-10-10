@@ -11,12 +11,10 @@
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
     "@types/js-cookie": "^3.0.2",
-    "@types/qs": "^6.9.7",
     "axios": "^0.27.2",
     "js-cookie": "^3.0.1",
     "naive-ui": "^2.33.3",
     "pinia": "^2.0.22",
-    "qs": "^6.11.0",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.7",
     "vditor": "^3.8.17",

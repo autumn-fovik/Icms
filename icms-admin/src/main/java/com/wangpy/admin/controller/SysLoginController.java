@@ -11,10 +11,7 @@ import com.wangpy.system.entity.vo.UserVo;
 import com.wangpy.system.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -42,7 +39,7 @@ public class SysLoginController {
      * @return {@link AjaxResult}
      */
     @PostMapping(value = "login")
-    public AjaxResult login(LoginBody loginBody){
+    public AjaxResult login(@RequestBody LoginBody loginBody){
         String token = sysLoginService.login(loginBody);
         return AjaxResult.success(HttpStatus.SUCCESS.getDescribe(),token);
     }
