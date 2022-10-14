@@ -1,8 +1,10 @@
 package com.wangpy.admin.controller;
 
+import com.wangpy.common.constant.AjaxResultStatus;
 import com.wangpy.common.controller.BaseController;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
+import com.wangpy.common.utils.SecurityUtils;
 import com.wangpy.system.service.SysUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +95,9 @@ public class SysUserController extends BaseController {
      */
     @PostMapping("status/{id}/{status}")
     public AjaxResult userStatusEdit(@PathVariable(value = "id") String id ,@PathVariable(value = "status") String status) {
+
+        if (SecurityUtils.getUserId().equals(id) && "1".equals(status))
+            return AjaxResult.ajaxResultStatus(AjaxResultStatus.SUCCESS,"不允许更新自身账号状态!");
         SysUserEntity user = new SysUserEntity();
         user.setUserId(id);
         user.setStatus(status);

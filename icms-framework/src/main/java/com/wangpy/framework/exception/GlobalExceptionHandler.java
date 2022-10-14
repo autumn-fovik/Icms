@@ -1,13 +1,17 @@
 package com.wangpy.framework.exception;
 
+import com.wangpy.common.constant.AjaxResultStatus;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.exception.ServiceException;
 import com.wangpy.common.exception.user.UserException;
 import io.lettuce.core.RedisConnectionException;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Date;
 
 /**
  * @Author: wangpy
@@ -39,6 +43,12 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public AjaxResult httpRequestMethodNotSupportedException (HttpRequestMethodNotSupportedException e){
+       return AjaxResult.ajaxResultStatus(AjaxResultStatus.BAD_METHOD);
+        // return new AjaxResult(AjaxResultStatus.BAD_METHOD.getCode(),AjaxResultStatus.BAD_METHOD.getDescribe());
+
+    }
 
     /**
      *  全局异常捕获

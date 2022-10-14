@@ -1,7 +1,7 @@
 <template>
   <n-card class="app-container" :segmented="{content : true}">
     <template #header>
-      <n-button type="primary" v-has-permi="['system:user:add']">
+      <n-button type="primary" v-has-permi="['system:user:add']" @click="dialogs.add.display = true">
         <template #icon>
           <SvgIcon icon="AddUser"/>
         </template>
@@ -15,10 +15,43 @@
     </template>
     <div class="dialog">
       <n-modal preset="card" :show="dialogs.add.display" title="添加用户" style="width: 30%">
-        <n-form label-align="left">
+        <n-form label-placement="left">
           <n-grid x-gap="20">
             <n-form-item-gi label="用户名" span="12">
               <n-input/>
+            </n-form-item-gi>
+            <n-form-item-gi label="邮箱" span="12">
+              <n-input/>
+            </n-form-item-gi>
+          </n-grid>
+
+        </n-form>
+
+      </n-modal>
+      <n-modal preset="card" :show="dialogs.edit.display" title="编辑用户" style="width: 30%">
+        <n-form label-placement="left" label-width="80px">
+          <n-grid x-gap="20">
+            <n-form-item-gi label="昵称" span="12">
+              <n-input/>
+            </n-form-item-gi>
+            <n-form-item-gi label="账号名" span="12">
+              <n-input/>
+            </n-form-item-gi>
+          </n-grid>
+          <n-grid x-gap="20">
+            <n-form-item-gi label="手机号" span="12">
+              <n-input/>
+            </n-form-item-gi>
+            <n-form-item-gi label="邮箱" span="12">
+              <n-input/>
+            </n-form-item-gi>
+          </n-grid>
+          <n-grid x-gap="20">
+            <n-form-item-gi label="用户状态" span="12">
+              <n-radio-group>
+                <n-radio>正常</n-radio>
+                <n-radio>停用</n-radio>
+              </n-radio-group>
             </n-form-item-gi>
             <n-form-item-gi label="邮箱" span="12">
               <n-input/>
@@ -36,7 +69,7 @@
 <script setup lang="ts">
 
 import type {DataTableColumns} from "naive-ui";
-import {list} from "@/apis/userApi";
+import {list , userStatusEdit as userStatusEditApi} from "@/apis/userApi";
 import {NButton, NSwitch, NTag} from "naive-ui";
 
 const dialogs = reactive({
@@ -44,6 +77,9 @@ const dialogs = reactive({
     display: false
   },
   userStatus : {
+    display : false
+  },
+  edit : {
     display : false
   }
 })
@@ -82,7 +118,7 @@ const createColumns = (): DataTableColumns<any> => {
     key: "status",
     title: "状态",
     render (row : any) {
-      return h(NSwitch,{ value : row.status === "0" ? true :false , "onUpdate:value" :() => ss(row) })
+      return h(NSwitch,{ value : row.status === "0" ? true :false , "onUpdate:value" :() => userStatusEdit(row) })
     }
   },{
     key : "",
@@ -90,7 +126,7 @@ const createColumns = (): DataTableColumns<any> => {
     render (row : any) {
 
       return h("div", {}, [
-        h(NButton, {onClick: () => "",  type : "primary"}, {default: () => "编辑"}),
+        h(NButton, {onClick: () => editUser(row),  type : "primary"}, {default: () => "编辑"}),
         h(NButton, {onClick: () => delUser(row), type: "error", style: 'margin-left: 5px;'}, {default: () => "删除"})
       ])
     }
@@ -118,21 +154,35 @@ const delUser = (row : any) => {
 
 
 }
-const ss = (row : any)=>{
+const userStatusEdit = (row : any)=>{
   window.$dialog?.info({
     title : "状态更新",
     content : "是否更新用户 < "+row.userName+" > 为 < " + (row.status === '0' ? "禁用": "启用")+" >",
     positiveText : "确认",
     negativeText : "取消",
     onPositiveClick : () => {
-      if (row.status === "0"){
-        row.status = "1"
-      }else {
-        row.status = "0"
-      }
+      userStatusEditApi(row.userId,row.status === "0"? "1" : "0").then(resp=>{
+        if (resp.code === 200){
+          window.$message?.success("状态更新成功")
+          if (row.status === "0"){
+            row.status = "1"
+          }else {
+            row.status = "0"
+          }
+        }else {
+          window.$message?.error(resp.msg)
+          // window.$message?.error("状态更新失败！")
+        }
+
+      })
+
+
     }
   })
 
+}
+const editUser =(row : any) => {
+  dialogs.edit.display = true
 }
 </script>
 
