@@ -1,7 +1,7 @@
 package com.wangpy.system.mapper;
 
-import com.wangpy.common.core.domain.entity.SysDictTypeEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wangpy.common.core.domain.entity.SysDictTypeEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

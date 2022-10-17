@@ -1,6 +1,7 @@
 package com.wangpy.framework.config;
 
 import com.wangpy.framework.security.filter.JwtAuthenticationTokenFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
 
@@ -27,7 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Resource
     private UserDetailsService userDetailsService;
-
+    /**
+     * 跨域过滤器
+     */
+    @Autowired
+    private CorsFilter corsFilter;
     @Resource
     private AuthenticationEntryPoint authenticationEntryPoint;
 
@@ -68,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 添加JWT filter
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         //http.addFilterBefore(coreFilter,JwtAuthenticationTokenFilter.class);
+        http.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
     }
     /**
      * 强散列哈希加密实现

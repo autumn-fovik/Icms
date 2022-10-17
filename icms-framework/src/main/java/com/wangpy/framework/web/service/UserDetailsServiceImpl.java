@@ -1,13 +1,11 @@
 package com.wangpy.framework.web.service;
 
 import com.wangpy.common.constant.UserConstants;
-import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
 import com.wangpy.common.core.domain.model.LoginUser;
 import com.wangpy.common.exception.user.UserException;
 import com.wangpy.common.utils.StringUtils;
 import com.wangpy.system.mapper.SysUserMapper;
-import com.wangpy.system.service.SysUserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @Author: wangpy

@@ -11,10 +11,8 @@
   </n-card>
 </template>
 
-<script>
-export default {
-  name: "sort"
-}
+<script setup lang="ts">
+
 </script>
 
 <style scoped>

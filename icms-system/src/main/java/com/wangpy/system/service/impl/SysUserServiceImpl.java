@@ -1,9 +1,9 @@
 package com.wangpy.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
 import com.wangpy.system.mapper.SysUserMapper;
 import com.wangpy.system.service.SysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

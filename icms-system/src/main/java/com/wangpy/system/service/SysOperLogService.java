@@ -1,7 +1,7 @@
 package com.wangpy.system.service;
 
-import com.wangpy.common.core.domain.entity.SysOperLogEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangpy.common.core.domain.entity.SysOperLogEntity;
 
 /**
  * <p>

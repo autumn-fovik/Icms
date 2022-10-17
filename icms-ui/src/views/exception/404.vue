@@ -1,11 +1,13 @@
 <template>
-<h2>404</h2>
+  <n-card class="app-container">
+    <h1>404</h1>
+
+  </n-card>
+
 </template>
 
-<script>
-export default {
-  name: "404"
-}
+<script lang="ts" setup>
+
 </script>
 
 <style scoped>

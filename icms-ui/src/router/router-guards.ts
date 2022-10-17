@@ -36,7 +36,12 @@ export function createRouterGuards(router : Router){
                 }
                 next({...to , replace : true})
             }else {
-                next()
+                if(to.path == "/login"){
+                    window.$message?.info("已登录，无需重新登录！")
+                    next({path : "/"})
+                }else {
+                    next()
+                }
             }
         }
 

@@ -2,12 +2,11 @@
   <n-card class="app-container">
 
   </n-card>
+
 </template>
 
-<script>
-export default {
-  name: "articlessss"
-}
+<script lang="ts" setup>
+
 </script>
 
 <style scoped>

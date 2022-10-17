@@ -1,6 +1,5 @@
 package com.wangpy.framework.web.service;
 
-import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
 import com.wangpy.common.core.domain.model.LoginBody;

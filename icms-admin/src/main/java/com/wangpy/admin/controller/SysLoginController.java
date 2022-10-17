@@ -10,11 +10,9 @@ import com.wangpy.system.entity.vo.RouterVo;
 import com.wangpy.system.entity.vo.UserVo;
 import com.wangpy.system.service.SysUserService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**

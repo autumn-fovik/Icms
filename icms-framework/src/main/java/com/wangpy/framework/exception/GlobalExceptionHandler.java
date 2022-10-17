@@ -4,14 +4,12 @@ import com.wangpy.common.constant.AjaxResultStatus;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.exception.ServiceException;
 import com.wangpy.common.exception.user.UserException;
-import io.lettuce.core.RedisConnectionException;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Date;
 
 /**
  * @Author: wangpy
@@ -43,6 +41,17 @@ public class GlobalExceptionHandler {
 
     }
 
+    /**
+     * Redis 链接异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RedisConnectionFailureException.class)
+    public AjaxResult ss(RedisConnectionFailureException e){
+        return AjaxResult.error("Redis 连接异常");
+
+    }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public AjaxResult httpRequestMethodNotSupportedException (HttpRequestMethodNotSupportedException e){
        return AjaxResult.ajaxResultStatus(AjaxResultStatus.BAD_METHOD);
@@ -50,6 +59,10 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(MyBatisSystemException.class)
+    public AjaxResult myBatisSystemException(MyBatisSystemException e){
+        return AjaxResult.error("Mysql 连接异常");
+    }
     /**
      *  全局异常捕获
      * @param e

@@ -1,7 +1,7 @@
 package com.wangpy.system.mapper;
 
-import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

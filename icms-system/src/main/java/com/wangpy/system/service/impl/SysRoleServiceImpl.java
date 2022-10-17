@@ -1,9 +1,9 @@
 package com.wangpy.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangpy.common.core.domain.entity.SysRoleEntity;
 import com.wangpy.system.mapper.SysRoleMapper;
 import com.wangpy.system.service.SysRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
