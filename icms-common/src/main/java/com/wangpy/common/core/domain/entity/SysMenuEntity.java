@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -140,6 +141,9 @@ public class SysMenuEntity implements Serializable {
      */
     @TableField("remark")
     private String remark;
+
+@TableField(exist = false)
+    private List<SysMenuEntity> children;
 
 
     public static final String MENU_ID = "menu_id";

@@ -21,5 +21,6 @@
     <sql id="Base_Column_List">
         role_id, role_name, role_key, role_sort, status, del_flag, create_by, create_time, update_by, update_time, remark
     </sql>
+    <select id="selectMenuByRoleId" resultType="Long" parameterType="Long"> select m.menu_id from sys_menu m left join sys_role_menu rm on m.menu_id = rm.menu_id where rm.role_id = #{roleId} and m.menu_id not in (select m.parent_id from sys_menu m inner join sys_role_menu rm on m.menu_id = rm.menu_id and rm.role_id = #{roleId}) ORDER BY order_num ASC </select>
 
 </mapper>

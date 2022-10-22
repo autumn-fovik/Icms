@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import useAppInfo from '../../../package.json'
-import {onMounted, reactive, ref} from 'vue'
+import {reactive} from 'vue'
 
 const {dependencies, devDependencies} = useAppInfo
 const dependenciesList = reactive<Record<string, string>[]>([])

@@ -16,5 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleEntity> implements SysRoleService {
-
+    public Long[] selectMenuByRoleId(Long roleId) {
+        return getBaseMapper().selectMenuByRoleId(roleId);
+    }
 }

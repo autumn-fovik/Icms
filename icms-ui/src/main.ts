@@ -1,10 +1,7 @@
 import {createApp} from 'vue'
 import './style.css'
 import '@icon-park/vue-next/styles/index.css'
-// 通用字体
-import 'vfonts/Lato.css'
-// 等宽字体
-import 'vfonts/FiraCode.css'
+
 import App from './App.vue'
 import {setupRouter} from "@/router";
 import {setupStore ,store} from "@/store";

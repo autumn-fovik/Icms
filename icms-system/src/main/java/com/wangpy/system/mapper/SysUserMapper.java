@@ -45,5 +45,7 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
      */
     public SysUserEntity queryUserByUserId(String userId);
 
+    public List<SysUserEntity> list();
+
 
 }

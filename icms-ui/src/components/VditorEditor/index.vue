@@ -14,6 +14,7 @@ const vditor = ref<Vditor | null>(null);
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
     width : "100%",
+    height : "800px",
     after: () => {
       // vditor.value is a instance of Vditor now and thus can be safely used here
       vditor.value!.setValue('Vue Composition API + Vditor + TypeScript Minimal Example');
@@ -24,14 +25,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .ads {
-  //position: fixed;
-  //top: 0;
-  //width: 100% !important;
-  //left: 0;
-  //height: 100vh !important;
-  //z-index: 90;
-  //border-radius: 0;
-  display: flex;
-  height: initial !important;
+
 }
 </style>

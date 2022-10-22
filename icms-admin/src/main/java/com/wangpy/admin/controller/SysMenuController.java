@@ -1,12 +1,11 @@
 package com.wangpy.admin.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangpy.common.controller.BaseController;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import com.wangpy.system.service.SysMenuService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,17 +27,34 @@ public class SysMenuController  extends BaseController {
      */
     @GetMapping(value = "list")
     public AjaxResult list(){
-        startPage();
-        List<SysMenuEntity> list = service.list();
-        return AjaxResult.success(getDataTable(list));
+        return AjaxResult.success(service.list(new QueryWrapper<SysMenuEntity>().orderByAsc(SysMenuEntity.ORDER_NUM)));
+
+
     }
 
     /**
      * 获取全部菜单（树形）
      * @return
      */
+    @GetMapping(value = "page")
     public AjaxResult listTree(){
-        return null;
+        startPage();
+        List<SysMenuEntity> list = service.list();
+        return AjaxResult.success(getDataTable(list));
     }
+    @PutMapping(value = "")
+    public AjaxResult add(@RequestBody SysMenuEntity sysMenuEntity){
+        return AjaxResult.success(service.save(sysMenuEntity));
+    }
+
+    @PostMapping(value = "")
+    public AjaxResult edit(@RequestBody SysMenuEntity sysMenuEntity){
+        return AjaxResult.success(service.updateById(sysMenuEntity));
+    }
+    @GetMapping(value = "/{id}")
+    public AjaxResult get(@PathVariable Long id){
+        return AjaxResult.success(service.getById(id));
+    }
+
 
 }
