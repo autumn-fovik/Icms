@@ -19,3 +19,28 @@ export function userStatusEdit(id :string , status : string) {
     })
 
 }
+
+export function getUserByUserId(id : string) {
+    return http.request({
+        url: "user/" + id,
+        method : "GET"
+    })
+
+}
+
+export function addUser(data : any) {
+    return http.request({
+        url: "user",
+        method : "PUT",
+        data
+    })
+
+}
+export function editUser(data : any) {
+    return http.request({
+        url: "user",
+        method : "POST",
+        data
+    })
+
+}

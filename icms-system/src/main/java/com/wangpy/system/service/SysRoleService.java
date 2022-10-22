@@ -12,5 +12,6 @@ import com.wangpy.common.core.domain.entity.SysRoleEntity;
  * @since 2022-09-21
  */
 public interface SysRoleService extends IService<SysRoleEntity> {
+    public Long[] selectMenuByRoleId(Long roleId);
 
 }

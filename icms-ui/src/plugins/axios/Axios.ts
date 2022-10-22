@@ -37,7 +37,8 @@ export default class Axios {
                 case 401 :
                     window.$message?.error("无效会话，或登陆过期，请重新登陆！")
                     useAppStoreWidthOut().removeToken()
-                     router.push({path : "/login"});
+
+                     router.push({path : "/login"})
                     return config
                     break;
                 case 204 :

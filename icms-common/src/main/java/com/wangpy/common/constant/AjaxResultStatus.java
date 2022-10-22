@@ -15,6 +15,10 @@ import lombok.NoArgsConstructor;
 public enum AjaxResultStatus {
 
     SUCCESS(200,"操作成功"),
+    CREATED(201,"对象创建成功"),
+    ACCEPTED(202,"请求已经被接受"),
+    NO_CONTENT(204,"操作已经执行成功，但是没有返回数据"),
+    SMALL_MISTAKE(205,"操作已经执行成功，但是有输入错误"),
     UNAUTHORIZED(401,"未授权）"),
     FORBIDDEN(403,"访问受限，授权过期"),
     NOT_FOUND(404,"资源，服务未找到"),

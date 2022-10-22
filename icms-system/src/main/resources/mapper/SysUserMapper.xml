@@ -22,6 +22,7 @@
         <result column="update_by" property="updateBy" />
         <result column="update_time" property="updateTime" />
         <result column="remark" property="remark" />
+        <collection property="roleIds" select="selectRolesByUserId" column="{userId=user_id}" ofType="com.wangpy.common.core.domain.entity.SysRoleEntity"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -43,4 +44,6 @@
         SELECT * FROM sys_user WHERE user_id = #{userId}
 
     </select>
+    <select id="selectRolesByUserId" parameterType="java.util.Map" resultMap="com.wangpy.system.mapper.SysRoleMapper.BaseResultMap"> SELECT distinct r.* FROM sys_role r LEFT JOIN sys_user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = #{userId} </select>
+    <select id="list" resultMap="com.wangpy.system.mapper.SysUserMapper.BaseResultMap"> select * from sys_user </select>
 </mapper>

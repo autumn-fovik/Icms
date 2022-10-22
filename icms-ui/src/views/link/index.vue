@@ -1,4 +1,4 @@
-<template>
+template>
   <n-card class="app-container">
 
   </n-card>

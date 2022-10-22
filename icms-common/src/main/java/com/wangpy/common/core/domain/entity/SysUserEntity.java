@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * <p>
@@ -136,7 +137,11 @@ public class SysUserEntity implements Serializable {
     @TableField("remark")
     private String remark;
 
-
+    /**
+     * 角色组
+     */
+    @TableField(exist = false)
+    private Set<Long> roleIds;
     public static final String USER_ID = "user_id";
 
 

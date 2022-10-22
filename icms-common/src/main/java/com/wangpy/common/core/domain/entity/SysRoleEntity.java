@@ -92,7 +92,8 @@ public class SysRoleEntity implements Serializable {
      */
     @TableField("remark")
     private String remark;
-
+    @TableField(exist = false)
+    private Long[] menuIds;
 
     public static final String ROLE_ID = "role_id";
 
