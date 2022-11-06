@@ -11,7 +11,7 @@
     </template>
     <div>
      <n-modal v-model:show="dialogs.display" :title="dialogs.title" preset="card"  style="width: 37%" v-model:on-after-leave="restFrom">
-        <n-form label-placement="left" label-width="80px" :model="userData">
+        <n-form label-placement="left" label-width="80px" :model="userData" ref="formRef" :rules="rules">
           <n-grid :cols="2">
             <n-form-item-gi label="用户名" path="userName">
               <n-input v-model:value="userData.userName" />
@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import {list, userStatusEdit as userStatusEditApi, getUserByUserId, editUser as editUserApi , addUser} from "@/apis/userApi"
-import {DataTableColumn, NButton, NSwitch, NTag} from "naive-ui";
+import {DataTableColumn, FormInst, NButton, NSwitch, NTag} from "naive-ui";
 import {listRole} from "@/apis/roleApi";
 
 
@@ -190,24 +190,37 @@ const emailOptions  =computed(()=>{
 
 
 const submitData = () =>  {
-  if (userData.value.userId == undefined || userData.value.userId == "") {
-    addUser(userData.value).then(resp => {
-      window.$message?.success("添加成功")
-      list(dataResources.value.pageNum,dataResources.value.pageSize).then(resp => {
-        dataResources.value = resp.data
-      })
-      dialogs.display = false
-    })
-  } else {
-    editUserApi(userData.value).then(resp => {
-      window.$message?.success("修改成功")
-      list(dataResources.value.pageNum,dataResources.value.pageSize).then(resp => {
-        dataResources.value = resp.data
-      })
-      dialogs.display = false
-      dialogs.title = "添加用户"
-    })
-  }
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      if (userData.value.userId == undefined || userData.value.userId == "") {
+        addUser(userData.value).then(resp => {
+          if (resp.code == 200){
+            window.$message?.success("添加成功")
+            list(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
+              dataResources.value = resp.data
+            })
+            dialogs.display = false
+          }else {
+            window.$message?.warning(resp.msg)
+          }
+        })
+      } else {
+        editUserApi(userData.value).then(resp => {
+          if (resp.code == 200){
+            window.$message?.success("修改成功")
+            list(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
+              dataResources.value = resp.data
+            })
+            dialogs.display = false
+            dialogs.title = "添加用户"
+          }else {
+            window.$message?.warning(resp.msg)
+          }
+
+        })
+      }
+    }
+  })
 
 }
 // 翻页
@@ -232,7 +245,31 @@ const restFrom = () => {
   }
 
 }
-
+const formRef = ref<FormInst | null>(null)
+const rules = ref({
+  userName:{
+    required: true,
+    message: '用户名为必填项',
+    trigger: 'blur'
+  },
+  nickName:{
+    required: true,
+    message: '昵称为必填项',
+    trigger: 'blur'
+  },
+  email:{
+    required: true,
+    message: '邮箱为必填项',
+    trigger: 'blur',
+    type : 'email'
+  },
+  roleIds:{
+    required: true,
+    message: '角色为必填项',
+    trigger: 'blur',
+    type : 'array'
+  }
+})
 
 </script>
 

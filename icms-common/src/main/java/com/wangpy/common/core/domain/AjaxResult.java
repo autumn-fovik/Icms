@@ -150,7 +150,7 @@ public class AjaxResult extends HashMap<String,Object> {
 
 
     public static AjaxResult ajaxResultStatus(AjaxResultStatus status){
-        return new AjaxResult(status.getCode(),status.getDescribe());
+        return new AjaxResult(status.getCode(), status.getInformation());
     }
     public static AjaxResult ajaxResultStatus(AjaxResultStatus status, String msg ){
         return new AjaxResult(status.getCode(),msg);

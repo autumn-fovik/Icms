@@ -18,6 +18,14 @@
           </template>
         </n-input>
       </n-form-item>
+      <n-form-item path="captcha">
+       <div style="width: 60%">
+         <n-input placeholder="请输入验证码" v-model:value="loginUser.captcha"  />
+       </div>
+        <div style="width: 40%;margin-left: 10px">
+         <n-image :src="imgSrc" style="width: 100%"  @click="initGet" preview-disabled/>
+       </div>
+      </n-form-item>
       <n-button style="width: 100%" type="primary" @click="login" :loading="spin">登陆</n-button>
     </n-form>
   </div>
@@ -28,6 +36,7 @@ import type {FormInst} from "naive-ui"
 import {useUserStore} from "@/store/modules/user";
 import {useRouter} from "vue-router";
 import {Key, User} from "@icon-park/vue-next"
+import { verificationCode } from "@/apis/loginApi"
 
 const store = useUserStore()
 
@@ -48,27 +57,51 @@ const rules = reactive({
     required: true,
     message: '密码为必填项',
     trigger: 'blur'
+  },captcha:{
+    required: true,
+    message: '验证码为必填项',
+    trigger: 'blur'
   }
 })
 const loginUser = reactive({
   username: "ry",
-  password: "admin123"
+  password: "admin123",
+  captcha: "",
+  uuid: "",
 })
 function login() {
   formRef.value?.validate((validation)=>{
     if (!validation){
       spin.value = true
       store.UserLogin(loginUser).then((resp : any)=>{
-        window.$message?.success("登陆成功")
-        router.push({path :redirect || "/"})
-        spin.value = false
+       if (resp.code == 200){
+         window.$message?.success("登陆成功")
+         router.push({path :redirect || "/"})
+         spin.value = false
+       }else {
+         window.$message?.error(resp.msg)
+         initGet();
+         spin.value = false
+       }
       }).catch(error => {
         spin.value = false
+        initGet();
       })
     }
   })
   
 }
+const imgSrc = ref("")
+const initGet = () => {
+  verificationCode().then(resp=>{
+    imgSrc.value = resp.data.image
+    loginUser.uuid = resp.data.uuid
+  })
+
+
+  
+}
+initGet();
 </script>
 
 <style scoped lang="scss">

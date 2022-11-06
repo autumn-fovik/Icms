@@ -4,12 +4,9 @@
       <n-button type="primary" @click="dialogs.display = true; dialogs.title = '添加菜单'">添加菜单</n-button>
     </template>
     <n-data-table :data="dataResources" :columns="column" :row-key="rowKey" :bordered="false"/>
-    <template #footer>
-      <n-pagination/>
-    </template>
     <div>
       <n-modal v-model:show="dialogs.display" :title="dialogs.title" preset="card" style="width: 37%" v-model:on-after-leave="restFrom">
-        <n-form label-placement="left" label-width="80px">
+        <n-form label-placement="left" label-width="80px" :model="menuData" ref="formRef" :rules="rules">
           <n-grid :cols="2">
             <n-form-item-gi label="父级菜单" path="parentId" span="24">
               <n-tree-select v-model:value="menuData.parentId" key-field="menuId" label-field="menuName" :options="treeOptions" />
@@ -56,7 +53,7 @@
 
 <script setup lang="ts">
 
-import {DataTableColumn, NButton, NTag} from "naive-ui";
+import {DataTableColumn, FormInst, NButton, NTag} from "naive-ui";
 import {addMenu, editMenu as editMenuApi, getMenu, listMenu} from "@/apis/menuApi";
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import {handleTree} from "@/utils/conversion";
@@ -87,7 +84,13 @@ const column: Array<DataTableColumn> = [{
   title: "名称"
 }, {
   key: "perms",
-  title: "权限标识"
+  title: "权限标识",
+  render : (row : any) => {
+   if (row.perms == null || row.perms == ""   )
+     return h(NTag, {type : "info"}, {default: () => "无权限标识"})
+   else
+     return h(NTag, {type : "info"}, {default: () => `${row.perms}`})
+  }
 }, {
   title: '菜单类型',
   key: 'menuType',
@@ -150,24 +153,30 @@ let menuData = ref({
 })
 
 function submitData() {
-  if (menuData.value.menuId == undefined || menuData.value.menuId == "") {
-    addMenu(menuData.value).then(() => {
-      window.$message?.success("添加成功")
-      listMenu().then(resp=> {
-        dataResources.value =handleTree( resp.data,"menuId")
-      })
-      dialogs.display = false
-    })
-  } else {
-    editMenuApi(menuData.value).then(() => {
-      window.$message?.success("修改成功")
-      listMenu().then(resp=> {
-        dataResources.value =handleTree( resp.data,"menuId")
-      })
-      dialogs.display = false
-      dialogs.title = "添加菜单"
-    })
-  }
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      if (menuData.value.menuId == undefined || menuData.value.menuId == "") {
+        addMenu(menuData.value).then(() => {
+          window.$message?.success("添加成功")
+          listMenu().then(resp => {
+            dataResources.value = handleTree(resp.data, "menuId")
+          })
+          dialogs.display = false
+        })
+      } else {
+        editMenuApi(menuData.value).then(() => {
+          window.$message?.success("修改成功")
+          listMenu().then(resp => {
+            dataResources.value = handleTree(resp.data, "menuId")
+          })
+          dialogs.display = false
+          dialogs.title = "添加菜单"
+        })
+
+      }
+    }
+  })
+
 
 }
 const restFrom = ()=> {
@@ -184,6 +193,31 @@ const restFrom = ()=> {
   }
 
 }
+
+const formRef = ref<FormInst | null>(null)
+
+const rules = ref({
+  menuName:{
+    required: true,
+    message: '菜单名为必填项',
+    trigger: 'blur'
+  },
+  icon:{
+    required: true,
+    message: '图标为必填项',
+    trigger: 'blur'
+  },
+  component:{
+    required: true,
+    message: '组件地址为必填项',
+    trigger: 'blur'
+  },
+  path:{
+    required: true,
+    message: '路由地址为必填项',
+    trigger: 'blur'
+  }
+})
 </script>
 
 <style scoped>

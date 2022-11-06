@@ -1,4 +1,5 @@
 <template>
+  <n-scrollbar>
   <n-menu
       :options="menuOptions"
       :collapsed-width="64"
@@ -7,6 +8,7 @@
 
       v-model:value="activeKey"
   />
+  </n-scrollbar>
 </template>
 
 <script lang="ts" setup>

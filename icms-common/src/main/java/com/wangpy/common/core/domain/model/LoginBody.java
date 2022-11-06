@@ -15,4 +15,6 @@ import lombok.NoArgsConstructor;
 public class LoginBody {
     private String username;
     private String password;
+    private String captcha;
+    private String uuid;
 }

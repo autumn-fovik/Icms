@@ -40,10 +40,35 @@ public class RedisCache {
 
     /**
      * 获取值
+     *
      * @param key 键
      * @return 值
      */
-    public Object getValByKey(String key){
+    public Object getValByKey(String key) {
         return redisTemplate.opsForValue().get(key);
+    }
+
+    /**
+     * 存储
+     *
+     * @param key
+     * @param val
+     */
+    public void setKeyAndValString(String key, String val) {
+        redisTemplate.opsForValue().set(key, val);
+
+    }
+
+    /**
+     * 存储
+     *
+     * @param key
+     * @param val
+     * @param time
+     * @param timeUnit
+     */
+    public void setKeyAndValString(String key, String val, Integer time, TimeUnit timeUnit) {
+        redisTemplate.opsForValue().set(key, val, time, timeUnit);
+
     }
 }

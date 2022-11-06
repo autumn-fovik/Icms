@@ -4,18 +4,17 @@ import '@icon-park/vue-next/styles/index.css'
 
 import App from './App.vue'
 import {setupRouter} from "@/router";
-import {setupStore ,store} from "@/store";
-import {NaiveProvider} from "@/components/NaiveProvider"
+import {setupStore} from "@/store";
 import * as icons from "@icon-park/vue-next"
 import setupDirective from "@/directives";
 import SvgIcon from "@/components/SvgIcon/index.vue"
 
 async function bootstrap() {
-    const naiveProvider = createApp(NaiveProvider)
+    //const naiveProvider = createApp(NaiveProvider)
     // 创建App实例
     const app = createApp(App)
     // 优先挂载实例
-    naiveProvider.mount("#appProvider",true)
+    //naiveProvider.mount("#appProvider",true)
     // 挂载路由
     await setupRouter(app)
     // 挂载状态管理器

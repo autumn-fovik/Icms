@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {store} from "@/store";
 import {useAppStore} from "@/store/modules/app";
 import {getUserInfo, login} from "@/apis/loginApi"
+import router from "@/router";
 
 export interface IUserStore {
     userInfo : any | undefined,
@@ -45,10 +46,15 @@ export const useUserStore = defineStore("user",{
         },
         UserLogout() {
             window.$dialog?.warning({
-                title : "提示",
+                title: "提示",
                 content: "是否登出系统 !",
                 positiveText: "确认",
-                negativeText: "取消"
+                negativeText: "取消",
+                onPositiveClick: () => {
+                    useAppStore().removeToken();
+                    window.$message?.success("登出成功")
+                    router.push("/login")
+                }
             })
 
         },

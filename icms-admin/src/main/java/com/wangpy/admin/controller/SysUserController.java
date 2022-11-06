@@ -2,6 +2,7 @@ package com.wangpy.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wangpy.common.constant.AjaxResultStatus;
+import com.wangpy.common.constant.UserConstants;
 import com.wangpy.common.controller.BaseController;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
@@ -10,6 +11,7 @@ import com.wangpy.common.utils.SecurityUtils;
 import com.wangpy.system.service.SysUserRoleService;
 import com.wangpy.system.service.SysUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,14 +32,17 @@ public class SysUserController extends BaseController {
     public SysUserService service;
     @Resource
     public SysUserRoleService userRoleService;
+    @Resource
+    public BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 查询全部用户
+     *
      * @return
      */
     @GetMapping(value = "list")
     @PreAuthorize(value = "@ss.hasPermi('system:user:list')")
-    public AjaxResult list(){
+    public AjaxResult list() {
         startPage();
         List<SysUserEntity> list = service.list();
         return AjaxResult.success(getDataTable(list));
@@ -64,33 +69,66 @@ public class SysUserController extends BaseController {
 
     /**
      * 编辑用户
+     *
      * @param sysUserEntity
      * @return
      */
     @PostMapping()
     @PreAuthorize(value = "@ss.hasPermi('system:user:edit')")
-    public AjaxResult editUser(@RequestBody SysUserEntity sysUserEntity){
+    public AjaxResult editUser(@RequestBody SysUserEntity sysUserEntity) {
+        QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(SysUserEntity.USER_NAME, sysUserEntity.getUserName());
+        queryWrapper.or().eq(SysUserEntity.EMAIL, sysUserEntity.getEmail());
+        SysUserEntity one = service.getOne(queryWrapper);
+        if (one != null) {
+            if (!one.getUserId().equals(sysUserEntity.getUserId())) {
+                if (sysUserEntity.getEmail().equals(one.getEmail()))
+                    return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "邮箱重复");
+                if (sysUserEntity.getUserName().equals(one.getUserName()))
+                    return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "用户名重复");
+            }
+        }
         userRoleService.removeById(sysUserEntity.getUserId());
         List<SysUserRoleEntity> userRoleEntity = new ArrayList<>();
         for (Long roleId : sysUserEntity.getRoleIds()) {
-            SysUserRoleEntity s= new SysUserRoleEntity(sysUserEntity.getUserId(),roleId);
+            SysUserRoleEntity s = new SysUserRoleEntity(sysUserEntity.getUserId(), roleId);
             userRoleEntity.add(s);
         }
         userRoleService.saveBatch(userRoleEntity);
         boolean b = service.updateById(sysUserEntity);
-        return AjaxResult.success("OK",b);
+        return AjaxResult.success("OK", b);
     }
 
     /**
      * 添加用户
+     *
      * @param sysUserEntity
      * @return
      */
     @PutMapping()
     @PreAuthorize(value = "@ss.hasPermi('system:user:add')")
-    public AjaxResult addUser(@RequestBody SysUserEntity sysUserEntity){
+    public AjaxResult addUser(@RequestBody SysUserEntity sysUserEntity) {
+        // 查询用户名或邮箱是否重复
+        QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(SysUserEntity.USER_NAME, sysUserEntity.getUserName());
+        queryWrapper.or().eq(SysUserEntity.EMAIL, sysUserEntity.getEmail());
+        SysUserEntity one = service.getOne(queryWrapper);
+
+        if (one != null) {
+            if (sysUserEntity.getEmail().equals(one.getEmail()))
+                return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "邮箱重复");
+            if (sysUserEntity.getUserName().equals(one.getUserName()))
+                return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "用户名重复");
+
+        }
+        if (sysUserEntity.getPassword().equals("")) {
+            sysUserEntity.setPassword(bCryptPasswordEncoder.encode("123456"));
+        } else {
+            sysUserEntity.setPassword(bCryptPasswordEncoder.encode(sysUserEntity.getPassword()));
+        }
+        // 添加用户
         boolean b = service.save(sysUserEntity);
-        return AjaxResult.success("OK",b);
+        return AjaxResult.success("OK", b);
     }
 
     /**
@@ -103,7 +141,7 @@ public class SysUserController extends BaseController {
     public AjaxResult delUser(@PathVariable(value = "id") String id){
         SysUserEntity user= new SysUserEntity();
         user.setUserId(id);
-        user.setDelFlag("2");
+        user.setDelFlag(UserConstants.USER_DEl);
         boolean b = service.updateById(user);
         return AjaxResult.success("OK",b);
     }

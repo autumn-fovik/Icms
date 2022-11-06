@@ -8,6 +8,7 @@
         <Navbar/>
       </n-layout-header>
       <n-layout-content content-style="padding: 24px;" class="app-content">
+       
         <router-view v-slot="{ Component, route }">
           <transition name="fade-transform" mode="out-in">
             <keep-alive :include="ProductList">
@@ -15,6 +16,7 @@
             </keep-alive>
           </transition>
         </router-view>
+
       </n-layout-content>
     </n-layout>
   </n-layout>

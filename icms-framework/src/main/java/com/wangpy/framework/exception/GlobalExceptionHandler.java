@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public AjaxResult httpRequestMethodNotSupportedException (HttpRequestMethodNotSupportedException e){
-       return AjaxResult.ajaxResultStatus(AjaxResultStatus.BAD_METHOD);
+       return AjaxResult.ajaxResultStatus(AjaxResultStatus.METHOD_NOT_ALLOW);
         // return new AjaxResult(AjaxResultStatus.BAD_METHOD.getCode(),AjaxResultStatus.BAD_METHOD.getDescribe());
 
     }
@@ -70,6 +70,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public AjaxResult exception(RuntimeException e){
+        e.printStackTrace();
         return AjaxResult.error(e.getClass().toString());
 
     }

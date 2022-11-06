@@ -2,7 +2,6 @@ package com.wangpy.admin.controller;
 
 import com.wangpy.common.controller.BaseController;
 import com.wangpy.common.core.domain.AjaxResult;
-import com.wangpy.common.core.domain.entity.SysMenuEntity;
 import com.wangpy.common.core.domain.entity.SysRoleEntity;
 import com.wangpy.common.core.domain.entity.SysRoleMenuEntity;
 import com.wangpy.common.utils.SecurityUtils;
@@ -16,7 +15,7 @@ import java.util.List;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 角色访问控制类
  * @Date: Created in 2022/10/20 15:32
  */
 @RestController

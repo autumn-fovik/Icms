@@ -6,7 +6,6 @@
 
     </div>
     <div class="app-header-right">
-      <Remind theme="outline" size="24" fill="#333" />
       <div class="vaw-avatar-container">
         <n-dropdown trigger="hover"  :options="options" size="large">
           <div class="action-wrapper">

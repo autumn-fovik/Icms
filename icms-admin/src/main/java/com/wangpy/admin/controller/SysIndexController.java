@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 首页默认地址
  * @Date: Created in 2022/8/19 22:55
  */
 @RestController

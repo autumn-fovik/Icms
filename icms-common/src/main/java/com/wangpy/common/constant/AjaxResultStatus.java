@@ -6,35 +6,44 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Author: wangpy
- * @Description: TODO
- * @Date: Created in 2022/10/10 23:05
+ * @Description: 响应状态 描述
+ * @Date: Created in 2022/11/3 23:53
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public enum AjaxResultStatus {
 
-    SUCCESS(200,"操作成功"),
-    CREATED(201,"对象创建成功"),
-    ACCEPTED(202,"请求已经被接受"),
-    NO_CONTENT(204,"操作已经执行成功，但是没有返回数据"),
-    SMALL_MISTAKE(205,"操作已经执行成功，但是有输入错误"),
-    UNAUTHORIZED(401,"未授权）"),
-    FORBIDDEN(403,"访问受限，授权过期"),
-    NOT_FOUND(404,"资源，服务未找到"),
-    BAD_METHOD(405,"不允许的http方法"),
-    ERROR(500,"系统错误");
+    /**
+     * 2 ** 正常代码
+     * 3 ** 不被支持的操作
+     * 4 ** 权限相关
+     * 5 ** 服务内部错误
+     */
+
+    SUCCESS(200, "操作成功"),
+    CREATED(201, "对象创建成功"),
+    ACCEPTED(202, "请求已经被接受"),
+    NO_CONTENT(204, "操作已经执行成功，但是没有返回数据"),
+
+    SMALL_MISTAKE(205, "参数错误"),
+
+    METHOD_NOT_ALLOW(300, "不备允许的HTTP方法"),
+
+    UNAUTHORIZ(400, "未授权"),
+
+    INSUFFICIENT_PRIVILEGES(401, "权限不足"),
+
+    ERROR(500, "系统错误");
+
 
     /**
      * 响应代码
      */
     private int code;
-
     /**
-     * 响应描述
+     * 默认描述信息
      */
-    private String describe;
-
-
+    private String information;
 
 }

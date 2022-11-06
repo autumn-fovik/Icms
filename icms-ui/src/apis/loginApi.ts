@@ -16,10 +16,18 @@ export  function getUserInfo() {
 
 }
 
-export  function getRouter() {
+export function getRouter() {
     return http.request({
-        url : "auth/getRoute",
-        method : "GET"
+        url: "auth/getRoute",
+        method: "GET"
+    })
+
+}
+
+export function verificationCode() {
+    return http.request({
+        url: "captchaImage",
+        method: "GET"
     })
 
 }

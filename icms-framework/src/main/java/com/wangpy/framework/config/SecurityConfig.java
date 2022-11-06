@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 部分URL无需权限即可访问
-                .antMatchers("/auth/login","/").permitAll()
+                .antMatchers("/auth/login", "/", "/captchaImage", "/Interdiction").permitAll()
                 // 除特定请求不需要鉴权，其他均需要
                 .anyRequest().authenticated()
                 .and()

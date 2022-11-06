@@ -8,21 +8,24 @@ import java.util.Map;
  * @Description: 字符串工具类
  * @Date: Created in 2022/3/11 6:47 PM
  */
-public class StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 空字符串
      */
     private static final String NULLSTR = "";
 
-    /** 下划线 */
+    /**
+     * 下划线
+     */
     private static final char SEPARATOR = '_';
 
     /**
      * 判断一个Collection是否为空， 包含List，Set，Queue
+     *
      * @param collection
      * @return
      */
-    public static boolean isEmpty(Collection<?> collection){
+    public static boolean isEmpty(Collection<?> collection) {
         return isNull(collection) || collection.isEmpty();
     }
 
@@ -182,4 +185,6 @@ public class StringUtils {
 
         return sb.toString();
     }
+
+
 }

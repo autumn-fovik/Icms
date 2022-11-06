@@ -1,15 +1,19 @@
 package com.wangpy.admin.controller;
 
+import com.wangpy.common.constant.AjaxResultStatus;
+import com.wangpy.common.constant.Constants;
 import com.wangpy.common.constant.HttpStatus;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
 import com.wangpy.common.core.domain.model.LoginBody;
+import com.wangpy.common.core.redis.RedisCache;
 import com.wangpy.common.utils.SecurityUtils;
 import com.wangpy.framework.web.service.SysLoginService;
 import com.wangpy.system.entity.vo.RouterVo;
 import com.wangpy.system.entity.vo.UserVo;
 import com.wangpy.system.service.SysUserService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,6 +33,9 @@ public class SysLoginController {
     private SysLoginService sysLoginService;
     @Resource
     private SysUserService userService;
+    @Autowired
+    private RedisCache redisCache;
+
 
     /**
      * 用户登陆
@@ -37,9 +44,18 @@ public class SysLoginController {
      * @return {@link AjaxResult}
      */
     @PostMapping(value = "login")
-    public AjaxResult login(@RequestBody LoginBody loginBody){
-        String token = sysLoginService.login(loginBody);
-        return AjaxResult.success(HttpStatus.SUCCESS.getDescribe(),token);
+    public AjaxResult login(@RequestBody LoginBody loginBody) {
+
+        if (loginBody.getUuid().equals("") || loginBody.getCaptcha().equals(""))
+            return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "验证码不能为空");
+        String valByKey = redisCache.getValByKey(Constants.CAPTCHA_CODE_KEY + loginBody.getUuid()).toString();
+        if (valByKey.equalsIgnoreCase(loginBody.getCaptcha())) {
+            String token = sysLoginService.login(loginBody);
+            return AjaxResult.success(HttpStatus.SUCCESS.getDescribe(), token);
+        } else {
+            return AjaxResult.ajaxResultStatus(AjaxResultStatus.NO_CONTENT, "验证码错误");
+        }
+
     }
 
     /**
