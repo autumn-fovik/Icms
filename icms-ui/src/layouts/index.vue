@@ -53,7 +53,7 @@ const ProductList = ref([])
 .app-warp {
   height: 100vh;
   width: 100%;
-  background-color: #f2f3f5;
+  background-color: #AFD7EC;
 
   .app-side {
     height: 100%;

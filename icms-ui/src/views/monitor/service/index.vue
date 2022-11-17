@@ -126,6 +126,7 @@
 
 <script setup lang="ts">
 import {service as servicesApi} from "@/apis/monitorApi";
+import {NEllipsis} from "naive-ui";
 
 const initGet = () => {
   servicesApi().then(resp => {
@@ -205,9 +206,12 @@ const columns = [{
 },{
   key : "usage",
   title : "已用百分比",
+  render: (row : any) => {
+    return h("div",{},{ default : () => `${row.usage} %`})
+  }
 }]
 onMounted(() =>{
-  setInterval(initGet,5000)
+  //setInterval(initGet,5000)
 })
 </script>
 

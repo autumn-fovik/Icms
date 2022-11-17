@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: Security 权限工具类
  * @Date: Created in 2022/8/17 23:00
  */
 public class SecurityUtils {

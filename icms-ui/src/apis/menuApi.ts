@@ -1,22 +1,13 @@
-import { http } from "@/plugins/axios";
+import {http} from "@/plugins/axios";
 
-export  function pageMenu(pageNum: number , pageSize : number) {
+export function listMenu(pageNum ?: number, pageSize ?: number) {
     return http.request({
-        url : "menu/list",
-        method : "GET",
-        params : {
-            pageNum : pageNum,
-            pageSize : pageSize
+        url: "menu/list",
+        method: "GET",
+        params: {
+            pageNum: pageNum,
+            pageSize: pageSize
         }
-    })
-
-}
-
-
-export  function listMenu() {
-    return http.request({
-        url : "menu/list",
-        method : "GET"
     })
 
 }

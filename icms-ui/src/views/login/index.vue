@@ -3,7 +3,7 @@
     <n-form class="login-container"  label-placement="left" label-width="0" :rules="rules" :model="loginUser" ref="formRef">
       <h2 class="title">登陆</h2>
       <n-form-item path="username" >
-        <n-input placeholder="" v-model:value="loginUser.username">
+        <n-input placeholder="" v-model:value="loginUser.username" @keydown.enter="login">
           <template #prefix>
               <User/>
 
@@ -12,17 +12,17 @@
         </n-input>
       </n-form-item>
       <n-form-item path="password">
-        <n-input placeholder="" v-model:value="loginUser.password" type="password" show-password-on="mousedown">
+        <n-input placeholder="" v-model:value="loginUser.password" type="password" show-password-on="mousedown" @keydown.enter="login">
           <template #prefix>
             <Key/>
           </template>
         </n-input>
       </n-form-item>
       <n-form-item path="captcha">
-       <div style="width: 60%">
-         <n-input placeholder="请输入验证码" v-model:value="loginUser.captcha"  />
+       <div style="width: 70%">
+         <n-input placeholder="请输入验证码" v-model:value="loginUser.captcha" @keydown.enter="login"  />
        </div>
-        <div style="width: 40%;margin-left: 10px">
+        <div style="width: 30%;margin-left: 10px">
          <n-image :src="imgSrc" style="width: 100%"  @click="initGet" preview-disabled/>
        </div>
       </n-form-item>

@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 自定义响应类
  * @Date: Created in 2022/9/21 16:23
  */
 public class AjaxResult extends HashMap<String,Object> {

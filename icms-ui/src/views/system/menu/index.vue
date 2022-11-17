@@ -3,7 +3,7 @@
     <template #header>
       <n-button type="primary" @click="dialogs.display = true; dialogs.title = '添加菜单'">添加菜单</n-button>
     </template>
-    <n-data-table :data="dataResources" :columns="column" :row-key="rowKey" :bordered="false"/>
+    <n-data-table :data="dataResources" :columns="column" :row-key="rowKey" striped  bordered/>
     <div>
       <n-modal v-model:show="dialogs.display" :title="dialogs.title" preset="card" style="width: 37%" v-model:on-after-leave="restFrom">
         <n-form label-placement="left" label-width="80px" :model="menuData" ref="formRef" :rules="rules">
@@ -69,8 +69,8 @@ const dialogs = reactive({
 let dataResources  = ref([] as Array<any>) as any
 // 表格列
 const column: Array<DataTableColumn> = [{
-  key: "menuId",
-  title: "序号"
+  key: "menuName",
+  title: "名称"
 }, {
   key: "icon",
   title: "图标",
@@ -79,9 +79,6 @@ const column: Array<DataTableColumn> = [{
       return h(SvgIcon, {icon: row.icon})
 
   }
-}, {
-  key: "menuName",
-  title: "名称"
 }, {
   key: "perms",
   title: "权限标识",

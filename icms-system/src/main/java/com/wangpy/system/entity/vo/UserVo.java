@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 用户 Vo
  * @Date: Created in 2022/8/27 21:00
  */
 @Data

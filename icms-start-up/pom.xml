@@ -7,7 +7,6 @@
         <groupId>com.wangpy</groupId>
         <version>1.0.0.dev</version>
     </parent>
-    <groupId>com.wangpy</groupId>
     <artifactId>icms-start-up</artifactId>
     <version>1.0.0.dev</version>
     <name>icms-start-up</name>
@@ -16,10 +15,6 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.wangpy</groupId>
             <artifactId>icms-admin</artifactId>
@@ -30,11 +25,6 @@
             <artifactId>icms-cms</artifactId>
             <version>1.0.0.dev</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -42,6 +32,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
             </plugin>
         </plugins>
     </build>

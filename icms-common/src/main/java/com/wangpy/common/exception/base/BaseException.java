@@ -2,7 +2,7 @@ package com.wangpy.common.exception.base;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 父级异常
  * @Date: Created in 2022/8/17 23:12
  */
 public class BaseException  extends RuntimeException{

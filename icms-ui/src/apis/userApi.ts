@@ -1,13 +1,10 @@
-import { http } from "@/plugins/axios";
+import {http} from "@/plugins/axios";
 
-export  function list(pageNum: number , pageSize : number) {
+export function listUser(queryParameters: any) {
     return http.request({
-        url : "user/list",
-        method : "GET",
-        params : {
-            pageNum : pageNum,
-            pageSize : pageSize
-        }
+        url: "user",
+        method: "GET",
+        params: queryParameters
     })
 
 }
@@ -21,26 +18,38 @@ export function userStatusEdit(id :string , status : string) {
 }
 
 export function getUserByUserId(id : string) {
+    return http.request<UserEntity>({
+        url: "user/" + id,
+        method: "GET"
+    })
+
+}
+
+export function addUser(data: any) {
+    return http.request({
+        url: "user",
+        method: "PUT",
+        data
+    })
+
+}
+
+export function editUser(data: any) {
+    return http.request({
+        url: "user",
+        method: "POST",
+        data
+    })
+
+}
+
+export function delUser(id: string, remark: string) {
     return http.request({
         url: "user/" + id,
-        method : "GET"
-    })
-
-}
-
-export function addUser(data : any) {
-    return http.request({
-        url: "user",
-        method : "PUT",
-        data
-    })
-
-}
-export function editUser(data : any) {
-    return http.request({
-        url: "user",
-        method : "POST",
-        data
+        method: "DELETE",
+        params: {
+            remark: remark
+        }
     })
 
 }

@@ -1,12 +1,13 @@
 package com.wangpy.common.core.domain.entity;
 
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,8 +22,8 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@Accessors(chain = true)
 @TableName("sys_oper_log")
+@ToString
 public class SysOperLogEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,11 +70,6 @@ public class SysOperLogEntity implements Serializable {
     @TableField("oper_name")
     private String operName;
 
-    /**
-     * 部门名称
-     */
-    @TableField("dept_name")
-    private String deptName;
 
     /**
      * 请求URL
@@ -121,6 +117,7 @@ public class SysOperLogEntity implements Serializable {
      * 操作时间
      */
     @TableField("oper_time")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime operTime;
 
 
@@ -137,8 +134,6 @@ public class SysOperLogEntity implements Serializable {
     public static final String OPERATOR_TYPE = "operator_type";
 
     public static final String OPER_NAME = "oper_name";
-
-    public static final String DEPT_NAME = "dept_name";
 
     public static final String OPER_URL = "oper_url";
 

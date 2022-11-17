@@ -5,12 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 资源配置
  * @Date: Created in 2022/10/14 23:38
  */
 @Configuration
@@ -18,17 +17,17 @@ public class ResourcesConfig implements WebMvcConfigurer {
 //    @Autowired
 //    private RepeatSubmitInterceptor repeatSubmitInterceptor;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry)
-    {
-        /** 本地文件上传路径 */
-//        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**")
-//                .addResourceLocations("file:" + RuoYiConfig.getProfile() + "/");
-
-        /** swagger配置 */
-        registry.addResourceHandler("/swagger-ui/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry)
+//    {
+//        /** 本地文件上传路径 */
+////        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**")
+////                .addResourceLocations("file:" + RuoYiConfig.getProfile() + "/");
+//
+//        /** swagger配置 */
+//        registry.addResourceHandler("/swagger-ui/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+//    }
 
     /**
      * 自定义拦截规则

@@ -37,14 +37,8 @@ const NaiveProviderContent = defineComponent({
 
 const teme =  {
   "Code": {
-    "textColor": "rgba(8, 124, 239, 1)"
   },
   "common": {
-    "primaryColor": "#37B0E8FF",
-    "primaryColorHover": "#66A2DDFF",
-    "primaryColorSuppl": "#3F9BB7FF",
-    "primaryColorPressed": "#1B71A6FF",
-    "successColor": "#18a058"
   }
 }
 

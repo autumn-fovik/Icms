@@ -1,7 +1,7 @@
 package com.wangpy.framework.security.handle;
 
 import com.alibaba.fastjson2.JSON;
-import com.wangpy.common.constant.HttpStatus;
+import com.wangpy.common.constant.AjaxResultStatus;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.utils.ServletUtils;
 import org.springframework.security.core.AuthenticationException;
@@ -22,8 +22,7 @@ import java.io.IOException;
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        int code = HttpStatus.UNAUTHORIZED.getCode();
         String msg = String.format("请求访问：%s，认证失败，无法访问系统资源", request.getRequestURI());
-        ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.error(code, msg)));
+        ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.ajaxResultStatus(AjaxResultStatus.UNAUTHORIZED, msg)));
     }
 }

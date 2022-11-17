@@ -1,25 +1,18 @@
-import { http } from "@/plugins/axios";
+import {http} from "@/plugins/axios";
 
-export  function pageRole(pageNum: number , pageSize : number) {
+export function listRole(pageNum ?: number, pageSize ?: number) {
     return http.request({
-        url : "role/page",
-        method : "GET",
-        params : {
-            pageNum : pageNum,
-            pageSize : pageSize
+        url: "role/list",
+        method: "GET",
+        params: {
+            pageNum: pageNum,
+            pageSize: pageSize
         }
     })
 
 }
 
 
-export  function listRole() {
-    return http.request({
-        url : "role/list",
-        method : "GET"
-    })
-
-}
 export  function addRole(data : any) {
     return http.request({
         url : "role",

@@ -4,7 +4,7 @@ import com.wangpy.common.exception.base.BaseException;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 用户父级异常
  * @Date: Created in 2022/8/17 23:16
  */
 public class UserException extends BaseException {

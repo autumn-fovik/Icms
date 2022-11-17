@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 字符串格式转换类
  * @Date: Created in 2022/4/9 22:39
  */
 public class Convert {

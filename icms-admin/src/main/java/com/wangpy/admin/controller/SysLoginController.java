@@ -48,7 +48,11 @@ public class SysLoginController {
 
         if (loginBody.getUuid().equals("") || loginBody.getCaptcha().equals(""))
             return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "验证码不能为空");
-        String valByKey = redisCache.getValByKey(Constants.CAPTCHA_CODE_KEY + loginBody.getUuid()).toString();
+        Object str = redisCache.getValByKey(Constants.CAPTCHA_CODE_KEY + loginBody.getUuid());
+        if (str == null) {
+            return AjaxResult.ajaxResultStatus(AjaxResultStatus.NO_CONTENT, "验证码过期");
+        }
+        String valByKey = str.toString();
         if (valByKey.equalsIgnoreCase(loginBody.getCaptcha())) {
             String token = sysLoginService.login(loginBody);
             return AjaxResult.success(HttpStatus.SUCCESS.getDescribe(), token);

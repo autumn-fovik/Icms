@@ -2,7 +2,7 @@ package com.wangpy.common.utils;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: SQL 工具类
  * @Date: Created in 2022/9/27 23:36
  */
 public class SqlUtil {

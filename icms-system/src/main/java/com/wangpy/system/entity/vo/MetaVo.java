@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 路由 Meta 参数类
  * @Date: Created in 2022/8/27 22:01
  */
 @Data

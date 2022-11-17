@@ -53,11 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import {addRole, editRole as editRoleApi, getRole,listRole, pageRole} from "@/apis/roleApi"
+import {addRole, editRole as editRoleApi, getRole,listRole} from "@/apis/roleApi"
 import {DataTableColumn, FormInst, NButton} from "naive-ui";
 import {listMenu} from "@/apis/menuApi";
 import {handleTree} from "@/utils/conversion";
-import {list} from "@/apis/userApi";
+import {listUser} from "@/apis/userApi";
 
 
 const dialogs = ref({
@@ -66,7 +66,7 @@ const dialogs = ref({
 })
 
 const initGet = () => {
-  pageRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
+  listRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
     dataResources.value = resp.data
   })
   listMenu().then(resp=> {
@@ -133,7 +133,7 @@ const submitData = () => {
       if (roleData.value.roleId == undefined || roleData.value.roleId == "") {
         addRole(roleData.value).then(resp => {
           window.$message?.success("添加成功")
-          pageRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
+          listRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
             dataResources.value = resp.data
           })
           dialogs.value.display = false
@@ -141,7 +141,7 @@ const submitData = () => {
       } else {
         editRoleApi(roleData.value).then(resp => {
           window.$message?.success("修改成功")
-          pageRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
+          listRole(dataResources.value.pageNum, dataResources.value.pageSize).then(resp => {
             dataResources.value = resp.data
           })
           dialogs.value.display = false
@@ -164,7 +164,7 @@ function restFrom() {
 
 }
 const formRef = ref<FormInst | null>(null)
-const rules = ref({
+const rules : any = ref({
   roleKey:{
     required: true,
     message: '权限标识为必填项',
@@ -184,7 +184,7 @@ const rules = ref({
 })
 // 翻页
 const turnPages = (pageNum : number) => {
-  list(pageNum, dataResources.value.pageSize).then(resp => {
+  listRole(pageNum, dataResources.value.pageSize).then(resp => {
     dataResources.value = resp.data
   })
 }

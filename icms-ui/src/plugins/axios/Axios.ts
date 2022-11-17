@@ -32,15 +32,18 @@ export default class Axios {
     // 响应拦截器
     private interceptorsResponse(){
         this.instance.interceptors.response.use(config => {
-            const { code , msg } = config.data
-            switch (code){
-                case 401 :
+            const {code, msg} = config.data
+            switch (code) {
+                case 400 :
                     window.$message?.error("无效会话，或登陆过期，请重新登陆！")
                     useAppStoreWidthOut().removeToken()
 
-                     router.push({path : "/login"})
+                    router.push({path: "/login"})
                     return config
                     break;
+                case 401 :
+                    window.$message?.error(msg);
+                    break
                 case 204 :
                     window.$message?.error(msg)
                 default:

@@ -1,12 +1,14 @@
 package com.wangpy.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wangpy.common.annotation.Log;
 import com.wangpy.common.constant.AjaxResultStatus;
 import com.wangpy.common.constant.UserConstants;
-import com.wangpy.common.controller.BaseController;
+import com.wangpy.common.core.controller.BaseController;
 import com.wangpy.common.core.domain.AjaxResult;
 import com.wangpy.common.core.domain.entity.SysUserEntity;
 import com.wangpy.common.core.domain.entity.SysUserRoleEntity;
+import com.wangpy.common.enums.BusinessType;
 import com.wangpy.common.utils.SecurityUtils;
 import com.wangpy.system.service.SysUserRoleService;
 import com.wangpy.system.service.SysUserService;
@@ -40,11 +42,18 @@ public class SysUserController extends BaseController {
      *
      * @return
      */
-    @GetMapping(value = "list")
+    @GetMapping(value = "")
     @PreAuthorize(value = "@ss.hasPermi('system:user:list')")
-    public AjaxResult list() {
+    @Log(title = "用户管理")
+    public AjaxResult list(SysUserEntity sysUserEntity) {
         startPage();
-        List<SysUserEntity> list = service.list();
+        QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
+        if (sysUserEntity.getUserName() != null && !"".equals(sysUserEntity.getUserName()))
+            queryWrapper.like(SysUserEntity.USER_NAME, sysUserEntity.getUserName());
+        if (sysUserEntity.getEmail() != null && !"".equals(sysUserEntity.getEmail()))
+            queryWrapper.like(SysUserEntity.EMAIL, sysUserEntity.getEmail());
+
+        List<SysUserEntity> list = service.list(queryWrapper);
         return AjaxResult.success(getDataTable(list));
 
     }
@@ -55,7 +64,7 @@ public class SysUserController extends BaseController {
      * @return
      */
     @GetMapping(value = "{id}")
-    @PreAuthorize(value = "@ss.hasPermi('system:user:list')")
+    @Log(title = "用户管理")
     public AjaxResult queryUserById(@PathVariable(value = "id") String id){
         SysUserEntity byId = service.getById(id);
         List<SysUserRoleEntity> list = userRoleService.list(new QueryWrapper<SysUserRoleEntity>().eq(SysUserRoleEntity.USER_ID, byId.getUserId()));
@@ -75,10 +84,12 @@ public class SysUserController extends BaseController {
      */
     @PostMapping()
     @PreAuthorize(value = "@ss.hasPermi('system:user:edit')")
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     public AjaxResult editUser(@RequestBody SysUserEntity sysUserEntity) {
         QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SysUserEntity.USER_NAME, sysUserEntity.getUserName());
         queryWrapper.or().eq(SysUserEntity.EMAIL, sysUserEntity.getEmail());
+        queryWrapper.ne(SysUserEntity.USER_ID, sysUserEntity.getUserId());
         SysUserEntity one = service.getOne(queryWrapper);
         if (one != null) {
             if (!one.getUserId().equals(sysUserEntity.getUserId())) {
@@ -107,6 +118,7 @@ public class SysUserController extends BaseController {
      */
     @PutMapping()
     @PreAuthorize(value = "@ss.hasPermi('system:user:add')")
+    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     public AjaxResult addUser(@RequestBody SysUserEntity sysUserEntity) {
         // 查询用户名或邮箱是否重复
         QueryWrapper<SysUserEntity> queryWrapper = new QueryWrapper<>();
@@ -133,17 +145,20 @@ public class SysUserController extends BaseController {
 
     /**
      * 删除用户（仅添加删除标识）
+     *
      * @param id
      * @return
      */
     @DeleteMapping(value = "{id}")
     @PreAuthorize(value = "@ss.hasPermi('system:user:del')")
-    public AjaxResult delUser(@PathVariable(value = "id") String id){
-        SysUserEntity user= new SysUserEntity();
+    @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    public AjaxResult delUser(@PathVariable(value = "id") String id, SysUserEntity sysUserEntity) {
+        SysUserEntity user = new SysUserEntity();
         user.setUserId(id);
         user.setDelFlag(UserConstants.USER_DEl);
+        user.setRemark(sysUserEntity.getRemark());
         boolean b = service.updateById(user);
-        return AjaxResult.success("OK",b);
+        return AjaxResult.success("OK", b);
     }
 
     /**
@@ -154,6 +169,7 @@ public class SysUserController extends BaseController {
      */
     @PostMapping("status/{id}/{status}")
     @PreAuthorize(value = "@ss.hasPermi('system:user:edit')")
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     public AjaxResult userStatusEdit(@PathVariable(value = "id") String id ,@PathVariable(value = "status") String status) {
 
         if (SecurityUtils.getUserId().equals(id) && "1".equals(status))

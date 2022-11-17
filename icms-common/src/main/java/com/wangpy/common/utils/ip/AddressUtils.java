@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.wangpy.common.constant.Constants;
 import com.wangpy.common.utils.StringUtils;
 import com.wangpy.common.utils.http.HttpUtils;
+import lombok.extern.log4j.Log4j2;
 
 
 /**
@@ -12,6 +13,7 @@ import com.wangpy.common.utils.http.HttpUtils;
  * @Description: 获取地址类
  * @Date: Created in 2022/11/4 12:56
  */
+@Log4j2
 public class AddressUtils {
     // IP地址查询
     public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
@@ -28,7 +30,7 @@ public class AddressUtils {
             try {
                 String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true", Constants.GBK);
                 if (StringUtils.isEmpty(rspStr)) {
-                    //  log.error("获取地理位置异常 {}", ip);
+                    log.error("获取地理位置异常 {}", ip);
                     return UNKNOWN;
                 }
                 JSONObject obj = JSON.parseObject(rspStr);
@@ -36,7 +38,7 @@ public class AddressUtils {
                 String city = obj.getString("city");
                 return String.format("%s %s", region, city);
             } catch (Exception e) {
-                // log.error("获取地理位置异常 {}", ip);
+                log.error("获取地理位置异常 {}", ip);
             }
         }
         return UNKNOWN;

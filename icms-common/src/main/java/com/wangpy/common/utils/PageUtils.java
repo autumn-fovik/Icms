@@ -6,7 +6,7 @@ import com.wangpy.common.core.page.TableSupport;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 分页工具类
  * @Date: Created in 2022/9/27 23:30
  */
 public class PageUtils extends PageHelper {

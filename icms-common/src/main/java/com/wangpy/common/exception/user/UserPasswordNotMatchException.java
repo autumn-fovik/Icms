@@ -2,7 +2,7 @@ package com.wangpy.common.exception.user;
 
 /**
  * @Author: wangpy
- * @Description: TODO
+ * @Description: 用户密码错误异常
  * @Date: Created in 2022/8/17 23:16
  */
 public class UserPasswordNotMatchException extends UserException{

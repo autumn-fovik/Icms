@@ -77,6 +77,7 @@ public class TokenService {
     public String createToken(LoginUser loginUser){
         String token = UUID.randomUUID().toString();
         loginUser.setToken(token);
+        setUserAgent(loginUser);
         refreshToken(loginUser);
         Map<String, Object> claims = new HashMap<>();
         claims.put(Constants.LOGIN_USER_KEY, token);
@@ -139,21 +140,38 @@ public class TokenService {
                 .parseClaimsJws(token)
                 .getBody();
     }
-    private String getTokenKey(String uuid)
-    {
+
+    private String getTokenKey(String uuid) {
         return Constants.LOGIN_TOKEN_KEY + uuid;
     }
+
     /**
      * 获取请求Token
+     *
      * @param request
      * @return
      */
-    public String getToken(HttpServletRequest request){
-        String token =   request.getHeader(header);
-        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)){
-            token = token.replace(Constants.TOKEN_PREFIX,"");
+    public String getToken(HttpServletRequest request) {
+        String token = request.getHeader(header);
+        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;
 
     }
+
+    /**
+     * 设置用户代理信息
+     *
+     * @param loginUser 登录信息
+     */
+    public void setUserAgent(LoginUser loginUser) {
+//        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+//        String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+//        loginUser.setIpaddr(ip);
+//        loginUser.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
+//        loginUser.setBrowser(userAgent.getBrowser().getName());
+//        loginUser.setOs(userAgent.getOperatingSystem().getName());
+    }
+
 }
