@@ -10,7 +10,7 @@ import com.wangpy.common.utils.StringUtils;
 import com.wangpy.common.utils.ip.IpUtils;
 import com.wangpy.framework.manager.AsyncManager;
 import com.wangpy.framework.manager.factory.AsyncFactory;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -33,7 +33,7 @@ import java.util.Map;
  */
 @Aspect
 @Component
-@Log4j2
+@Slf4j
 public class LogAspect {
 
     /**

@@ -25,9 +25,9 @@ public enum AjaxResultStatus {
     CREATED(201, "对象创建成功"),
     ACCEPTED(202, "请求已经被接受"),
     NO_CONTENT(204, "操作已经执行成功，但是没有返回数据"),
+    SMALL_MISTAKE(205, "参数错误"),
     NORMAL_EXECUTION_WITH_ERROR(210, "操作正常执行，但发生错误"),
 
-    SMALL_MISTAKE(205, "参数错误"),
 
     METHOD_NOT_ALLOW(300, "不备允许的HTTP方法"),
 

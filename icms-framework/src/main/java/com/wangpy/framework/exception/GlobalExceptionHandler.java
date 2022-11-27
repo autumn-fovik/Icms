@@ -6,6 +6,7 @@ import com.wangpy.common.exception.ServiceException;
 import com.wangpy.common.exception.base.BaseException;
 import com.wangpy.common.exception.user.UserException;
 import org.mybatis.spring.MyBatisSystemException;
+import org.slf4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,13 +24,16 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 @Order(value = 99)
 public class GlobalExceptionHandler {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     /**
      * 用户异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(UserException.class)
-    public AjaxResult userException(UserException e){
+    public AjaxResult userException(UserException e) {
         return AjaxResult.error(e.getMessage());
 
     }
@@ -52,7 +56,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public AjaxResult handleAccessDeniedException(AccessDeniedException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        //log.error("请求地址'{}',权限校验失败'{}'", requestURI, e.getMessage());
+        log.error("请求地址'{}',权限校验失败'{}'", requestURI, e.getMessage());
         return AjaxResult.ajaxResultStatus(AjaxResultStatus.INSUFFICIENT_PRIVILEGES, "没有权限，请联系管理员授权");
     }
 
@@ -87,9 +91,22 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BaseException.class)
-    public AjaxResult exception(BaseException e) {
+    public AjaxResult baseException(BaseException e) {
         e.printStackTrace();
         return AjaxResult.error(e.getClass().toString());
+
+    }
+
+    /**
+     * 全局异常捕获
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public AjaxResult exception(Exception e) {
+        e.printStackTrace();
+        return AjaxResult.ajaxResultStatus(AjaxResultStatus.ERROR, e.getMessage());
 
     }
 

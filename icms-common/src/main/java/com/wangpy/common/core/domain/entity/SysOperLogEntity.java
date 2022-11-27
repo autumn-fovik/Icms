@@ -1,6 +1,5 @@
 package com.wangpy.common.core.domain.entity;
 
-import com.alibaba.fastjson2.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -117,8 +116,7 @@ public class SysOperLogEntity implements Serializable {
      * 操作时间
      */
     @TableField("oper_time")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime operTime;
+    private Date operTime;
 
 
     public static final String OPER_ID = "oper_id";

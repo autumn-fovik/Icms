@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.wangpy.common.constant.Constants;
 import com.wangpy.common.utils.StringUtils;
 import com.wangpy.common.utils.http.HttpUtils;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
  * @Description: 获取地址类
  * @Date: Created in 2022/11/4 12:56
  */
-@Log4j2
+@Slf4j
 public class AddressUtils {
     // IP地址查询
     public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";

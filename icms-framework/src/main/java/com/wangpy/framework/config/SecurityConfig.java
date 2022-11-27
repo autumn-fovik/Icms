@@ -1,7 +1,6 @@
 package com.wangpy.framework.config;
 
 import com.wangpy.framework.security.filter.JwtAuthenticationTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -34,7 +33,7 @@ public class SecurityConfig {
     /**
      * 跨域过滤器
      */
-    @Autowired
+    @Resource
     private CorsFilter corsFilter;
     @Resource
     private AuthenticationEntryPoint authenticationEntryPoint;
@@ -42,7 +41,7 @@ public class SecurityConfig {
     @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
-    @Autowired
+    @Resource
     private AuthenticationConfiguration authenticationConfiguration;
 
     /**
@@ -103,7 +102,7 @@ public class SecurityConfig {
                 .headers().frameOptions().disable();
         // 添加JWT filter
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        //http.addFilterBefore(coreFilter,JwtAuthenticationTokenFilter.class);
+        // 添加允许跨域
         http.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
         return http.build();
     }

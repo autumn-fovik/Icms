@@ -240,11 +240,15 @@ const delUser = (id: string) => {
   window.$dialog?.info({
     title: '请输入删除原因',
     content: () => {
-      return h(NInput,{ value : remarks.value , "onUpdate:value" : (val) => { remarks.value = val }  },{default : () => ""})
+      return h(NInput,{ value : remarks.value , "onUpdate:value" : (val) => { remarks.value = val } ,style : "  margin-top: 20px;" },{default : () => ""})
     },
     positiveText: '确认',
     onPositiveClick: () => {
-      delUserApi(id,remarks.value)
+      delUserApi(id,remarks.value).then((resp)=>{
+        if (resp.code == 200)
+          window.$message?.success("删除成功")
+        initGet()
+      })
 
     }
 

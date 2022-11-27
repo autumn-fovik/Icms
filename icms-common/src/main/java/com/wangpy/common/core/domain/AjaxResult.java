@@ -1,7 +1,6 @@
 package com.wangpy.common.core.domain;
 
 import com.wangpy.common.constant.AjaxResultStatus;
-import com.wangpy.common.constant.HttpStatus;
 import com.wangpy.common.utils.StringUtils;
 
 import java.util.Date;
@@ -103,7 +102,7 @@ public class AjaxResult extends HashMap<String,Object> {
      * @return 成功消息
      */
     public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(HttpStatus.SUCCESS.getCode(), msg, data);
+        return new AjaxResult(AjaxResultStatus.SUCCESS.getCode(), msg, data);
     }
 
     /**
@@ -133,7 +132,7 @@ public class AjaxResult extends HashMap<String,Object> {
      * @return 警告消息
      */
     public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(HttpStatus.NO_CONTENT.getCode(), msg, data);
+        return new AjaxResult(AjaxResultStatus.NORMAL_EXECUTION_WITH_ERROR.getCode(), msg, data);
     }
 
     /**

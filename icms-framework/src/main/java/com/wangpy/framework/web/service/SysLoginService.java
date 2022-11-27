@@ -6,7 +6,10 @@ import com.wangpy.common.core.domain.model.LoginBody;
 import com.wangpy.common.core.domain.model.LoginUser;
 import com.wangpy.common.exception.ServiceException;
 import com.wangpy.common.exception.user.UserPasswordNotMatchException;
+import com.wangpy.common.utils.DateUtils;
 import com.wangpy.common.utils.SecurityUtils;
+import com.wangpy.common.utils.ServletUtils;
+import com.wangpy.common.utils.ip.IpUtils;
 import com.wangpy.system.entity.vo.MetaVo;
 import com.wangpy.system.entity.vo.RouterVo;
 import com.wangpy.system.mapper.SysUserMapper;
@@ -56,6 +59,7 @@ public class SysLoginService {
 
         }
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        recordLoginInfo(loginUser.getUserId());
         return tokenService.createToken(loginUser);
     }
 
@@ -98,13 +102,26 @@ public class SysLoginService {
                 vo.setPath(menu.getPath());
                 vo.setHidden("0".equals(menu.getVisible()));
                 vo.setComponent(menu.getComponent());
-                vo.setMeta(new MetaVo(menu.getMenuId(),menu.getMenuName(),menu.getIcon(),1 == menu.getIsCache()));
-                vo.setChildren(compileRout(list,menu.getMenuId()));
+                vo.setMeta(new MetaVo(menu.getMenuId(), menu.getMenuName(), menu.getIcon(), 1 == menu.getIsCache()));
+                vo.setChildren(compileRout(list, menu.getMenuId()));
                 li.add(vo);
             }
         }
         return li;
 
+    }
+
+    /**
+     * 记录登录信息
+     *
+     * @param userId 用户ID
+     */
+    public void recordLoginInfo(String userId) {
+        SysUserEntity sysUser = new SysUserEntity();
+        sysUser.setUserId(userId);
+        sysUser.setLoginIp(IpUtils.getIpAddr(ServletUtils.getRequest()));
+        sysUser.setLoginDate(DateUtils.getNowDate());
+        sysUserMapper.updateById(sysUser);
     }
 
 }

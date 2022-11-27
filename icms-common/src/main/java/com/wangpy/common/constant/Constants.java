@@ -37,6 +37,11 @@ public class Constants {
     public static final String RATE_LIMIT_KEY = "rate_limit:";
 
     /**
+     * 封禁 redis key
+     */
+    public static final String BANN_KEY = "bann_key:";
+
+    /**
      * 验证码有效期（分钟）
      */
     public static final Integer CAPTCHA_EXPIRATION = 2;

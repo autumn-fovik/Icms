@@ -14,12 +14,18 @@ export const RootRoute: RouteRecordRaw = {
         component : () => import('@/views/dashboard/index.vue'),
         meta: {
             title: '仪表盘',
-            id : 0
+            id: 0
         },
     }],
     meta: {
         title: 'Root',
     },
+};
+
+export const InterdictionRoute: RouteRecordRaw = {
+    path: '/Interdiction',
+    name: 'Root',
+    component: () => import('@/views/Interdiction/index.vue'),
 };
 
 export const LoginRoute: RouteRecordRaw = {

@@ -8,6 +8,7 @@ import {setupStore} from "@/store";
 import * as icons from "@icon-park/vue-next"
 import setupDirective from "@/directives";
 import SvgIcon from "@/components/SvgIcon/index.vue"
+import {check} from "@/apis/securityApi";
 
 async function bootstrap() {
     //const naiveProvider = createApp(NaiveProvider)
@@ -26,9 +27,14 @@ async function bootstrap() {
         app.component(key, (icons as any)[key]);
     });
 
-    app.component("SvgIcon",SvgIcon)
+    app.component("SvgIcon", SvgIcon)
     // 挂载Vue 实例
     app.mount('#app')
+    check().then(resp => {
+        window.$message?.success(resp?.msg)
+    })
+
+
     //naiveProvider.unmount()
 }
 

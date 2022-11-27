@@ -3,7 +3,8 @@
     <template #header>
       <n-button type="primary" @click="dialogs.display = true; dialogs.title = '添加菜单'">添加菜单</n-button>
     </template>
-    <n-data-table :data="dataResources" :columns="column" :row-key="rowKey" striped  bordered/>
+        <n-data-table :data="dataResources" :columns="column" :row-key="rowKey" striped  bordered/>
+
     <div>
       <n-modal v-model:show="dialogs.display" :title="dialogs.title" preset="card" style="width: 37%" v-model:on-after-leave="restFrom">
         <n-form label-placement="left" label-width="80px" :model="menuData" ref="formRef" :rules="rules">

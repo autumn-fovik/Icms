@@ -1,7 +1,7 @@
 package com.wangpy.common.utils.http;
 
 import com.wangpy.common.constant.Constants;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.*;
@@ -18,7 +18,7 @@ import java.security.cert.X509Certificate;
  * @Description: 通用http发送方法
  * @Date: Created in 2022/11/4 12:57
  */
-@Log4j2
+@Slf4j
 public class HttpUtils {
     /**
      * 向指定 URL 发送GET方法的请求

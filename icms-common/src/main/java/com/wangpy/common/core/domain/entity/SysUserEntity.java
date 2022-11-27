@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -105,7 +105,7 @@ public class SysUserEntity implements Serializable {
      * 最后登录时间
      */
     @TableField("login_date")
-    private LocalDateTime loginDate;
+    private Date loginDate;
 
     /**
      * 创建者
@@ -117,7 +117,7 @@ public class SysUserEntity implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -129,7 +129,7 @@ public class SysUserEntity implements Serializable {
      * 更新时间
      */
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 备注

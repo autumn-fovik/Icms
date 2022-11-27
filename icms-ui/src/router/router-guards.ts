@@ -4,7 +4,7 @@ import {useUserStoreWidthOut} from "@/store/modules/user";
 import {useAsyncRouteStoreWidthOut} from "@/store/modules/asyncRoute";
 import {ErrorPageRoute} from "@/router/baseRouter";
 
-const whitePathList = ['/login']
+const whitePathList = ['/login', '/Interdiction']
 
 export function createRouterGuards(router : Router){
     router.beforeEach(async (to, from, next)=>{

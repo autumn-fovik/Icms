@@ -1,6 +1,6 @@
 package com.wangpy.common.utils;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.*;
 
@@ -9,7 +9,7 @@ import java.util.concurrent.*;
  * @Description: 线程相关工具类.
  * @Date: Created in 2022/11/6 23:51
  */
-@Log4j2
+@Slf4j
 public class Threads {
     /**
      * sleep等待,单位为毫秒

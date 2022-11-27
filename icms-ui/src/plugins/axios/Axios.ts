@@ -34,24 +34,40 @@ export default class Axios {
         this.instance.interceptors.response.use(config => {
             const {code, msg} = config.data
             switch (code) {
+                case 200 :
+                    return config;
                 case 400 :
                     window.$message?.error("无效会话，或登陆过期，请重新登陆！")
                     useAppStoreWidthOut().removeToken()
 
-                    router.push({path: "/login"})
-                    return config
-                    break;
+                    router.push({path: "/login"}).then(r => {
+                    })
+                    return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
                 case 401 :
-                    window.$message?.error(msg);
-                    break
+                    window.$message?.error("权限不足，无法操作");
+                    return Promise.reject('"权限不足，无法操作。')
                 case 204 :
                     window.$message?.error(msg)
-                default:
                     return config
-                    break;
+                case 500 :
+                    window.$message?.error(msg)
+                    return Promise.reject(new Error(msg))
+                default:
+                    return Promise.resolve(config.data)
 
             }
 
+        }, error => {
+            let {message} = error;
+            if (message == "Network Error") {
+                message = "后端接口连接异常";
+            } else if (message.includes("timeout")) {
+                message = "系统接口请求超时";
+            } else if (message.includes("Request failed with status code")) {
+                message = "系统接口" + message.substr(message.length - 3) + "异常";
+            }
+            window.$message?.error(message)
+            return Promise.reject(error)
         })
     }
 

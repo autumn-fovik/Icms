@@ -1,15 +1,21 @@
 <template>
   <div>
     <n-grid y-gap="10" x-gap="10">
-      <n-gi span="24">
+      <n-gi span="18">
         <n-card>
           <n-input>
             <template #prefix>文章标题</template>
           </n-input>
         </n-card>
       </n-gi>
+      <n-gi span="6">
+        <n-card>
+          <n-button style="width: 100%;" type="primary">发布</n-button>
+        </n-card>
+      </n-gi>
       <n-gi span="18">
         <TinyMCE/>
+        <VditorEditor/>
       </n-gi>
      <n-gi span="6">
        <n-grid y-gap="10">

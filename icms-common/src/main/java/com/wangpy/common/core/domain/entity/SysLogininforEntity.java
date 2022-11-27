@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -79,7 +79,7 @@ public class SysLogininforEntity implements Serializable {
      * 访问时间
      */
     @TableField("login_time")
-    private LocalDateTime loginTime;
+    private Date loginTime;
 
 
     public static final String INFO_ID = "info_id";

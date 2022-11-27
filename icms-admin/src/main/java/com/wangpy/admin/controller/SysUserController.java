@@ -146,18 +146,19 @@ public class SysUserController extends BaseController {
     /**
      * 删除用户（仅添加删除标识）
      *
-     * @param id
+     * @param sysUserEntity
      * @return
      */
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "{userId}")
     @PreAuthorize(value = "@ss.hasPermi('system:user:del')")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
-    public AjaxResult delUser(@PathVariable(value = "id") String id, SysUserEntity sysUserEntity) {
-        SysUserEntity user = new SysUserEntity();
-        user.setUserId(id);
-        user.setDelFlag(UserConstants.USER_DEl);
-        user.setRemark(sysUserEntity.getRemark());
-        boolean b = service.updateById(user);
+    public AjaxResult delUser(SysUserEntity sysUserEntity) {
+        if (SecurityUtils.getUserId().equals(sysUserEntity.getUserId())) {
+            return AjaxResult.ajaxResultStatus(AjaxResultStatus.SMALL_MISTAKE, "不允许删除自身账号");
+        }
+        sysUserEntity.setDelFlag(UserConstants.USER_DEl);
+        sysUserEntity.setRemark(sysUserEntity.getRemark());
+        boolean b = service.updateById(sysUserEntity);
         return AjaxResult.success("OK", b);
     }
 

@@ -10,7 +10,7 @@ import com.wangpy.common.utils.spring.SpringUtils;
 import com.wangpy.system.service.SysLogininforService;
 import com.wangpy.system.service.SysOperLogService;
 import eu.bitwalker.useragentutils.UserAgent;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.TimerTask;
 
@@ -19,7 +19,7 @@ import java.util.TimerTask;
  * @Description: 异步工厂（产生任务用）
  * @Date: Created in 2022/11/6 23:54
  */
-@Log4j2
+@Slf4j
 public class AsyncFactory {
     /**
      * 记录登录信息
