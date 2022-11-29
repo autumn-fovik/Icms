@@ -25,16 +25,12 @@
             <artifactId>icms-cms</artifactId>
             <version>1.0.0.dev</version>
         </dependency>
+        <dependency>
+            <groupId>com.wangpy</groupId>
+            <artifactId>icms-upload</artifactId>
+            <version>1.0.0-dev</version>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

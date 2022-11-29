@@ -84,7 +84,7 @@ function login() {
          initGet();
          spin.value = false
        }
-      }).catch(error => {
+      }).catch(() => {
         spin.value = false
         initGet();
       })
@@ -118,7 +118,7 @@ initGet();
 
 .login-container {
   border-radius: 10px;
-  margin: 0px auto;
+  margin: 0 auto;
   width: 350px;
   padding: 30px 35px 30px 35px;
   background: #fff;
@@ -128,7 +128,7 @@ initGet();
 }
 
 .title {
-  margin: 0px auto 40px auto;
+  margin: 0 auto 40px auto;
   text-align: center;
   color: #505458;
 }

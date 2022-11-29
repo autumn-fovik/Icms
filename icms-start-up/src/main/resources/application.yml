@@ -25,7 +25,7 @@ logging:
 # Spring配置
 spring:
   profiles:
-    active: druid
+    active: druid , storage
   # 文件上传
   servlet:
     multipart:
